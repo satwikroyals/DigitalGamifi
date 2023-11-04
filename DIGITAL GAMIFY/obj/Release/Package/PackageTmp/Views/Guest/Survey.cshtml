@@ -1,0 +1,298 @@
+﻿@{
+    Layout = null;
+}
+
+@using DIGITAL_GAMIFY.Code;
+
+@{
+    // Response.Cache.SetNoStore();
+    if (Convert.ToInt32(Request.QueryString["cid"]) == 0)
+    {
+        Response.Redirect("~/Guest/Register");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Survey</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="~/customercontent/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/customercontent/css/styles.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        var websiteurlapi = '@Globalsettings.GetWebSiteUrlApi()';
+        var websiteurl = '@Globalsettings.GetWebSiteUrl()';
+    </script>
+</head>
+<body>
+    <div class="">
+        <div class="">
+            <div class="">
+                <div class="frame-border">
+                    <div class="container-fluid p-0 content-h boxscroll do-nicescrol4">
+                        <div class="wrap" id="nogames" style="display: none;text-align: center;">
+                            <div class="mt-4 mb-3">
+                                <div class="mt-3"><img src="~/Content/images/logo.png" class="img-fl  uid w-50" height="100px"></div>
+                                <h4 class="t-color">Hi ,</h4>
+                                <h6 class="px-3 py-3">Sorry it seems like you already finished feedback.</h6>
+                            </div>
+                        </div>
+                        @*<div class="wrap" id="nogames" style="display:none">
+                            <div class="mt-4 mb-1">
+                                <div class="mt-3"><img src="~/Content/images/logo.png" class="img-fl  uid w-50" height="100px"></div>
+                                <h4 class="t-color">Hi ,</h4>
+                                <h6 class="px-3 py-3">Sorry it seems like you already finished feedback.</h6>
+
+                            </div>
+                        </div>*@
+                        <div style="display: none;text-align: center;" id="prizedetails">
+                            <h6 class="px-3 py-3"><span id="prizemessage"></span></h6>
+                            <div class="mt-3 mb-1"><img id="prize" src="" class="img-fl  uid w-50" height="100px"></div>
+                            <div id="complimentary" style="display:none">
+                                <h6 class="px-3 py-3">
+                                    please provide the following details to claim the prize.
+                                </h6>
+                                <div id="physical1" style="display:none"></div>
+
+                                <div id="physical2" style="display:none"></div>
+
+                                <div class="form-group">
+                                    <textarea class="form-control" name="Address" id="Address" placeholder="Address"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12 text-center ">
+                                <button type="button" class=" btn btn-block mybtn text-white g-btn tx-tfm" onclick="Finish()">Continue</button>
+                            </div>
+                        </div>
+                        <div class="wrap" id="game">
+                            <input type="hidden" id="BusinessId" value="0" />
+                            <input type="hidden" id="GameName" value="" />
+                            <input type="hidden" id="PhysicalPrize1" value="" />
+                            <input type="hidden" id="PhysicalPrize2" value="" />
+                            <input type="hidden" id="gid" value="@Request.QueryString["id"]" />
+                            <input type="hidden" id="" value="@ViewBag.url" />
+                            <input type="hidden" id="CustomerId" value="@Request.QueryString["cid"]" />
+                            <input type="hidden" id="email" value="@Request.QueryString["_m"]" />
+                            <div>
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active surimage">
+                                            @*<img class="d-block w-100" src="~/customercontent/images/4.jpg" alt="First slide">*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="finger-lightly-wrapper">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="welcome-image-wrapper">
+                                            <p class="para-wel"><b class="surveyq"></b></p>
+                                            <input type="hidden" id="Surveyquestionid" />
+                                            <form>
+                                                <div class="welcome-choice surveya">
+                                                    @*<div>
+                                            <input type="radio" id="huey" name="drone" value="huey" checked>
+                                            <label for="huey">Huey</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" id="dewey" name="drone" value="dewey">
+                                            <label for="dewey">Dewey</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" id="louie" name="drone" value="louie">
+                                            <label for="louie">Louie</label>
+                                        </div>*@
+                                                    @*<div>
+                                            <input type="radio" id="answer" name="answer" value="0" onchange="show2()">
+                                            <input type="text" name="IsTextField" class="form-control" id="IsTextField" aria-describedby="emailHelp" placeholder="Own opinion">
+                                        </div>*@
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mt-4 mb-3" id="btn" style="display:none">
+                                    <div class="col-md-4 text-center ">
+                                        <button type="button" class=" btn btn-block mybtn text-white g-btn tx-tfm" onclick="RedeemPrize()">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="circle-button"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="redeemcode" />
+    <input type="hidden" id="PrizeId" value="0" />
+    <script src="~/customercontent/js/jquery-3.5.1.slim.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+    <script type="text/javascript" src="~/Content/js/jquery.min.js"></script>
+    <script src="~/customercontent/js/popper.min.js"></script>
+    <script src="~/customercontent/js/bootstrap.min.js"></script>
+    <script src="~/customercontent/js/global.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.js"></script>
+    <script type="text/javascript">
+        $(".do-nicescrol4").niceScroll(".wrap");
+    </script>
+    <script type="text/javascript">$("body").niceScroll();</script> -->
+    <img src="~/customercontent/images/3.png" hidden="hidden" id="swipe" />
+    <script src="~/customercontent/js/wScratchPad.js"></script>
+    <script>
+    var gid = $('#gid').val();
+    var cid = $('#CustomerId').val();
+
+    function show2() {
+        $("#btn").css("display", "block");
+        //$("#IsTextField").prop('disabled', false);
+    }
+    function show() {
+        $("#btn").css("display", "block");
+        //$("#IsTextField").prop('disabled', true);
+    }
+    $(document).ready(function () {
+        //$("#IsTextField").prop('disabled', true);
+    });
+
+    getsurveybybyid();
+
+    function getsurveybybyid() {
+        gl.ajaxreq(websiteurlapi + 'GetSurveybyId', 'get', { sid: gid, cid: cid }, function (response) {
+            if (response.question != "") {
+                var textans = response.question[0].IsTextField;
+                $("#PhysicalPrize1").val(response.SurveyDetails.PhysicalPrize1);
+                $("#PhysicalPrize2").val(response.SurveyDetails.PhysicalPrize2);
+                $("#BusinessId").val(response.SurveyDetails.BusinessId);
+                $("#GameName").val(response.SurveyDetails.SurveyName);
+                $(".surimage").append('<img class="d-block w-100" id="SurveyImage" src="' + response.SurveyDetails.Surveyimagepath + '" alt="First slide">')
+                $('.surveyq').html(response.question[0].QuestionNum + ') ' + response.question[0].Question + ':');
+                $('#Surveyquestionid').val(response.question[0].questionId)
+                $.each(response.SurveyDetails.Attrlist, function (a, attri) {
+
+                    $('#physical1').append('<div class="form-group">' +
+                 '<label class="col-sm-2 control-label">' + attri.Attribute + '</label>' +
+                 '<select name="' + attri.Attribute + '" class="form-control" id="physical1' + attri.Attribute + '" aria-describedby="emailHelp" placeholder="Enter Colour">' +
+                 '</select>' +
+                 '</div>');
+                    $.each(attri.values, function (i, size) {
+                        $('#physical1' + attri.Attribute).append("<option value='" + size + "'>" + size + "</option>");
+                    });
+                });
+                $.each(response.SurveyDetails.Attrlist2, function (a, attri) {
+
+                    $('#physical2').append('<div class="form-group">' +
+                 '<label class="col-sm-2 control-label">' + attri.Attribute + '</label>' +
+                 '<select name="' + attri.Attribute + '" class="form-control" id="physical2' + attri.Attribute + '" aria-describedby="emailHelp" placeholder="Enter Colour">' +
+                 '</select>' +
+                 '</div>'
+                 );
+                    $.each(attri.values, function (i, size) {
+                        $('#physical2' + attri.Attribute).append("<option value='" + size + "'>" + size + "</option>");
+                    });
+                });
+                $.each(response.question[0].answers, function (k, itemans) {
+                    $('.surveya').append('<div>' +
+                 '<input type="radio" id="huey" name="answer" onchange="show()" value="' + itemans.SurveyanswerId + '">' +
+                 '<label>' + itemans.Answer + '</label>' +
+                 '</div>');
+                });
+                if (textans == 1) {
+                    $('.surveya').append('<div>' +
+                '<input type="text" name="IsTextField" class="form-control" id="IsTextField" aria-describedby="emailHelp" placeholder="Comment">' +
+                '</div>');
+                }
+            } else {
+                $("#game").css("display", "none");
+                $("#nogames").css("display", "block");
+            }
+        }, '', '', '', '', false, false);
+    }
+    function RedeemPrize() {
+        var cid = $("#CustomerId").val();
+        var sid = $("#gid").val();
+        var qid = $("#Surveyquestionid").val();
+        var aid = $("input[name=answer]:checked").val();
+        var atext = $("#IsTextField").val();
+        if (atext == undefined) {
+            atext = "";
+        }
+        var dt = new Date();
+
+        gl.ajaxreq(websiteurlapi + 'InsertCustomerSurveyAnswer', 'get', { sid: sid, cid: cid, qid: qid, aid: aid, answertext: atext, Duration: 0 }, function (response) {
+            $('.surveya').html('');
+            if (response.IsFinished == 0) {
+                var textans = response.SurveyQuestion.IsTextField;
+                $('.surveyq').html(response.SurveyQuestion.QuestionNum + ') ' + response.SurveyQuestion.Question + ':');
+                $('#Surveyquestionid').val(response.SurveyQuestion.SurveyquestionId)
+                $.each(response.SurveyQuestion.answers, function (k, itemans) {
+                    $('.surveya').append('<div>' +
+                 '<input type="radio" id="huey" name="answer" onchange="show()" value="' + itemans.SurveyanswerId + '">' +
+                 '<label>' + itemans.Answer + '</label>' +
+                 '</div>');
+                });
+                if (textans == 1) {
+                    $('.surveya').append('<div>' +
+                //' <input type="radio" id="answer" name="answer" value="0" onchange="show2()">' +
+                '<input type="text" name="IsTextField" class="form-control" id="IsTextField" aria-describedby="emailHelp" placeholder="Comment">' +
+                '</div>');
+                    //$("#IsTextField").prop('disabled', true);
+                }
+            } else {
+                if (response.PrizeDetails.PrizeNumber == 0 || response.PrizeDetails.PrizeNumber == 3) {
+                    $("#prizemessage").html('<span>' + response.PrizeDetails.PrizeMessage + '</span>');
+                } else {
+                    $("#prizemessage").html('Congratulations you have won a great prize.<br/><span>' + response.PrizeDetails.PrizeMessage + '</span>');
+                }
+                $("#prize").attr("src", response.PrizeDetails.PrizePath);
+                $("#PrizeId").val(response.PrizeDetails.PrizeNumber);
+                $("#redeemcode").val(response.RedeemCode);
+                if (($("#PrizeId").val() == 1 || $("#PrizeId").val() == 2) && ($("#PhysicalPrize1").val() == 1 || $("#PhysicalPrize2").val() == 1)) {
+                    $("#complimentary").css("display", "block");
+                    if ($("#PrizeId").val() == 1) {
+                        $("#physical1").css("display", "block");
+                        $("#physical2").html('');
+                    }
+                    if ($("#PrizeId").val() == 2) {
+                        $("#physical2").css("display", "block");
+                        $("#physical1").html('');
+                    }
+                } else {
+                    $("#complimentary").css("display", "none");
+                }
+                $("#game").css("display", "none");
+                $("#prizedetails").css("display", "block");
+                gl.ajaxreq(websiteurlapi + 'SendDigitalGamifyPrizeNotification', 'post', { Email: $("#email").val(), GameId: $("#gid").val(), PrizeNumber: $("#PrizeId").val(), BusinessId: $("#BusinessId").val(), RedeemCode: $("#redeemcode").val(), Title: $("#GameName").val(), PrizePath: $("#prize").attr("src"), PrizeDetails: $("#prizemessage").val(), Type: 4, GameimgPath: $("#SurveyImage").attr('src') }, function (resp) {
+
+                });
+                //if ($("#PrizeId").val() != 3) {
+                //    gl.ajaxreq(websiteurlapi + 'SendDigitalGamifyPrizeNotification', 'post', { Email: $("#email").val(), GameId: $("#gid").val(), PrizeNumber: $("#PrizeId").val(), BusinessId: 0, RedeemCode: $("#redeemcode").val() }, function (resp) {
+
+                //    });
+                //}
+            }
+            $("#btn").css("display", "none");
+        }, '', '', '', '', false, false);
+    }
+    function Finish() {
+        var cid = $("#CustomerId").val();
+        var sid = $("#gid").val();
+        var prize = $("#PrizeId").val();
+        var redeemcode = $("#redeemcode").val();
+        var size = $('[name="Size"]').val() == undefined ? "" : $('[name="Size"]').val();
+        var colour = $('[name="Color"]').val() == undefined ? "" : $('[name="Color"]').val();
+        var address = $("#Address").val() == undefined ? "" : $("#Address").val();
+        gl.ajaxreq(websiteurlapi + 'CustomerPrizeRedeemPrize', 'get', { sid: sid, cid: cid, size: size, colour: colour, interval: "", intervalid: 0, PrizeId: 0, RedeemCode: redeemcode, Address: address }, function (response) {
+            //window.location.href = "@Url.Action("Finish", "Guest")";
+            }, '', '', '', '', false, false);
+            window.location.href = "Finish?id=" + $("#BusinessId").val();
+        };
+    </script>
+</body>
+</html>

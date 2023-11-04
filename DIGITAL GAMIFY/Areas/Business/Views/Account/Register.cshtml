@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<main id="main ">
+
+    <!-- ======= About Us Section ======= -->
+    <!-- End About Us Section -->
+    <!-- ======= Services Section ======= -->
+    <!-- ======= Portfolio Section ======= -->
+    <!-- End Portfolio Section -->
+    <section id="contact" class="contact vbn">
+        <div class="container">
+            <div class="row mt-5 justify-content-center" data-aos="fade-up">
+                <div class="col-lg-10">
+                    <div class="section-title">
+                        <h2>Registration</strong></h2>
+                    </div>
+                    <form action="~/Guest/RegisterGuest" method="post" role="form" class="email-form">
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <label class="ml-3i">First Name</label>
+                                <input type="text" name="FirstName" class="form-control" id="FirstName" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required />
+                                <span class="text-danger" id="firstname"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="ml-3i">Last Name</label>
+                                <input type="text" name="LastName" class="form-control" id="LastName" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required />
+                                <span class="text-danger" id="lastname"></span>
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                <label class="ml-3i">Street Address</label>
+                <textarea class="form-control" name="message" rows="2" data-rule="required" data-msg="Please write something for us"></textarea>
+                <div class="validate"></div>
+            </div>*@
+
+                        <div class="form-group">
+                            <label class="ml-3i">Address</label>
+                            <textarea class="form-control" name="Address" rows="2" data-rule="required" data-msg="Please write something for us"></textarea>
+                            <div class="validate"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <label class="ml-3i">City</label>
+                                <input type="text" name="City" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validate"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="ml-3i">State </label>
+                                <select id="StateId" name="StateId" class="form-control">
+                                    <option value="0">-- Select --</option>
+                                    <option value="1">Texas</option>
+                                    <option value="2">Chicago</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <label class="ml-3i">Zip Code</label>
+                                <input type="text" name="ZipCode" class="form-control" id="ZipCode" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validate"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="ml-3i">Phone Number</label>
+                                <input type="text" name="Mobile" class="form-control" id="Mobile" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <label class="ml-3i">Email Address</label>
+                                <input type="text" name="Email" class="form-control" id="Email" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required />
+                                <span class="text-danger" id="email"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="ml-3i">Age Group </label>
+                                <select id="Age" name="Age" class="form-control">
+                                    <option value="0">-- Select --</option>
+                                    <option value="1">10-21</option>
+                                    <option value="2">22-40</option>
+                                    <option value="3">41-65</option>
+                                    <option value="4">65+</option>
+                                </select>
+                            </div> 
+                        </div>
+                        <input type="hidden" name="BusinessId" value="1"/>
+                        <input type="hidden" name="Guest" value="1"/>
+                        <div class="text-center"><button type="submit" onclick="return validate()">Submit</button></div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- ======= Our Clients Section ======= -->
+    <!-- End Our Clients Section -->
+
+</main><!-- End #main -->
+<!-- ======= Footer ======= -->
+ <script src="~/customercontent/js/Guest.js"></script>

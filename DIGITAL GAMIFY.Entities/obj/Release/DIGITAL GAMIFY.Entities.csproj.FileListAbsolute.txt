@@ -1,0 +1,10 @@
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Release\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Release\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Release\DIGITAL GAMIFY.Entities.csprojResolveAssemblyReference.cache
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Release\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Release\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Release\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Release\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Release\DIGITAL GAMIFY.Entities.csprojResolveAssemblyReference.cache
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Release\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Release\DIGITAL GAMIFY.Entities.pdb

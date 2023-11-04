@@ -1,0 +1,403 @@
+﻿@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code;
+@model DIGITAL_GAMIFY.Entities.SwipeandWinEntity
+
+
+@{
+    ViewBag.Title = "Add Swipe and Win";
+}
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header mylinks">
+                    <ul class="breadcrumb">
+                        <li>Swipe and Win </li>
+                        <li class="active">Add/Edit</li>
+                    </ul>
+                    <div class="vd_panel-menu hidden-sm hidden-xs resize-content" data-intro="" data-step="5" data-position="left">
+                        <div data-action="remove-navbar" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-navbar-button menu"><i class="fa fa-arrows-h"></i></div>
+                        <div data-action="remove-header" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-header-button menu"><i class="fa fa-arrows-v"></i></div>
+                        <div data-action="fullscreen" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="fullscreen-button menu"><i class="glyphicon glyphicon-fullscreen"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd_content-section clearfix subdiv">
+                <div class="col-lg-12 ">
+                    <div class="row" id="advanced-input">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="row" id="auto-complete-input">
+                        <div class="col-md-12">
+                            <div class="panel widget">
+                                <div class="panel-heading vd_bg-grey">
+                                    <h3 class="panel-title"><span class="menu-icon"><i class="fa fa-gamepad"></i></span>Add/Edit Swipe and Win </h3>
+                                </div>
+                                <div class="panel-body form-horizontal">
+                                    @using (Html.BeginForm("Add", "SwipeandWin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.TextBoxFor(m => m.GameId, null, new { @class = "hide", id = "GameId" })
+                                        @Html.AntiForgeryToken();
+                                        @Html.ValidationSummary(false, "", new { @class = "alert alert-danger err" })
+                                        <div class="clearfix"></div>
+                                        <div class="form-group">
+                                            <input type="hidden" id="TotalPlayed" value="@Model.TotalPlayed" />
+                                            <label class="col-sm-2 control-label">Title : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextBoxFor(m => m.Title, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "200", placeholder = "Title", id = "Title" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Game Image : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <img id="imgpreview" src="@Url.Content(Model.ImagePath)" class="previewimg" /><br /><br />
+                                                @Html.TextBoxFor(m => m.Image, new { @class = "hide" })
+                                                @Html.TextBox("ImageFile", null, htmlAttributes: new { name = "ImageFile", @class = "width-70 width-110 myfilds mytxtfilds", type = "file", placeholder = "Upload SwipeanWin Image", id = "ImageFile", onchange = "readURL(this,'imgpreview');" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt">First Prize <span class="vd_red">*</span></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Title :</label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextBox("FirstPrizeText", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "200", placeholder = "Title", id = "FirstPrizeText" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Image :</label>
+                                            <div class="col-sm-5 controls">
+                                                <img id="imgpreviewfirstprize" src="@Url.Content(Model.FirstPrizeImagePath)" class="previewimg" /><br /><br />
+                                                @Html.TextBoxFor(m => m.FirstPrizeImage, new { @class = "hide" })
+                                                @Html.TextBox("FirstPrizeImageFile", null, htmlAttributes: new { name = "FirstPrizeImage", @class = "width-70 width-110 myfilds mytxtfilds gamed", type = "file", placeholder = "Upload First Prize Image", id = "FirstPrizeImageFile", onchange = "readURL(this,'imgpreviewfirstprize');" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Count :</label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextBox("FirstPrizeCount", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds game", maxlength = "7", placeholder = "Prize Count", id = "FirstPrizeCount" })
+                                                <label class="control-label">Prizes Left: <span class="vd_red" id="FirstPrizesLeft">@Model.FirstPrizesLeft</span></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">First Prize Details <span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextArea("FirstPrizeCondition", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "1000", placeholder = "FirstPrize Condition", id = "FirstPrizeCondition" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="checkbox" value="1"  name="PhysicalPrize1" id="PhysicalPrize1" onchange="Attr1()" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="attri1" style="display:none">
+                                            <h5 class="m-0 main-txt varians-wrap">Variants (Please enter multiple values with comma separated)</h5>
+                                            <div id="attributes">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt">Second Prize <span class="vd_red">*</span></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Title :</label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextBox("SecondPrizeText", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "200", placeholder = "Title", id = "SecondPrizeText" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Image :</label>
+                                            <div class="col-sm-5 controls">
+                                                <img id="imgpreviewsecondprize" src="@Url.Content(Model.SecondPrizeImagePath)" class="previewimg" /><br /><br />
+                                                @Html.TextBoxFor(m => m.SecondPrizeImage, new { @class = "hide" })
+                                                @Html.TextBox("SecondPrizeImageFile", null, htmlAttributes: new { name = "SecondPrizeImage", @class = "width-70 width-110 myfilds mytxtfilds gamed", type = "file", placeholder = "Upload Second Prize Image", id = "SecondPrizeImageFile", onchange = "readURL(this,'imgpreviewsecondprize');" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Count :</label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextBox("SecondPrizeCount", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds game", maxlength = "7", placeholder = "Prize Count", id = "SecondPrizeCount" })
+                                                <label class="control-label">Prizes Left: <span class="vd_red" id="SecondPrizesLeft">@Model.SecondPrizesLeft</span></label>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <label class="col-sm-2 control-label">Not For Below 21 <span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    @Html.CheckBox("SecondPrizeAgeLimit", htmlAttributes: new { id = "SecondPrizeAgeLimit", value = 1 })
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Second Prize Details <span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextArea("SecondPrizeCondition", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "1000", placeholder = "SecondPrize Condition", id = "SecondPrizeCondition" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="checkbox" value="1" name="PhysicalPrize2" id="PhysicalPrize2" onchange="Attr2()" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="attri2" style="display:none">
+                                            <h5 class="m-0 main-txt varians-wrap">Variants (Please enter multiple values with comma separated)</h5>
+                                            <div id="attributes2">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt">Third Prize <span class="vd_red">*</span></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Title :</label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextBox("ThirdPrizeText", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "200", placeholder = "Title", id = "ThirdPrizeText" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Image :</label>
+                                            <div class="col-sm-5 controls">
+                                                <img id="imgpreviewthirdprize" src="@Url.Content(Model.ThirdPrizeImagePath)" class="previewimg" /><br /><br />
+                                                @Html.TextBoxFor(m => m.ThirdPrizeImage, new { @class = "hide" })
+                                                @Html.TextBox("ThirdPrizeImageFile", null, htmlAttributes: new { name = "ThirdPrizeImage", @class = "width-70 width-110 myfilds mytxtfilds gamed", type = "file", placeholder = "Upload Third Prize Image", id = "ThirdPrizeImageFile", onchange = "readURL(this,'imgpreviewthirdprize');" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Count :</label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextBox("ThirdPrizeCount", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds game", maxlength = "7", placeholder = "Prize Count", id = "ThirdPrizeCount" })
+                                                <label class="control-label">Prizes Left: <span class="vd_red" id="SecondPrizesLeft">@Model.ThirdPrizesLeft</span></label>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <label class="col-sm-2 control-label">Not For Below 21 <span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    @Html.CheckBox("ThirdPrizeAgeLimit", htmlAttributes: new { id = "ThirdPrizeAgeLimit", value = 1 })
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Third Prize Details <span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextArea("ThirdPrizeCondition", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "1000", placeholder = "ThirdPrize Condition", id = "ThirdPrizeCondition" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="checkbox" value="1" name="PhysicalPrize3" id="PhysicalPrize3" onchange="Attr3()" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="attri3" style="display:none">
+                                            <h5 class="m-0 main-txt varians-wrap">Variants (Please enter multiple values with comma separated)</h5>
+                                            <div id="attributes3">
+
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <label class="col-sm-2 control-label">Prize Expiration Date <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds date" name="PrizeExpiryDate" value="@Model.PrizeExpiryDate" id="PrizeExpiryDate" placeholder="Date" />
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Once In :</label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.DropDownList("OnceIn", new List<SelectListItem>() { new SelectListItem { Text = "3", Value = "3" }, new SelectListItem { Text = "5", Value = "5" }, new SelectListItem { Text = "10", Value = "10" }, new SelectListItem { Text = "15", Value = "15" }, new SelectListItem { Text = "25", Value = "25" }, new SelectListItem { Text = "50", Value = "50" }, new SelectListItem { Text = "100", Value = "100" }, new SelectListItem { Text = "200", Value = "200" }, new SelectListItem { Text = "500", Value = "500" }, new SelectListItem { Text = "1000", Value = "1000" }, }, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds gamed" })
+                                                @*@Html.TextBox("OnceIn", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "7", placeholder = "Once In", id = "OnceIn" })*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Start Date <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @*<input type="text" class="width-70 width-110 myfilds mytxtfilds date" name="StartDate" id="StartDate" placeholder="Date" />*@
+                                                @Html.TextBox("StartDate", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds date", maxlength = "30", placeholder = "Start Date", id = "StartDate", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">End Date <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @*<input type="text" class="width-70 width-110 myfilds mytxtfilds date" name="EndDate" id="EndDate" placeholder="Date" />*@
+                                                @Html.TextBox("EndDate", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds date", maxlength = "30", placeholder = "End Date", id = "EndDate", @readonly = "readonly" })
+                                                @*<span class="input-group-btn">
+                                                        <button class="btn btn-default cal-time" type="button">  <i class="fa fa-calendar iconcolr" aria-hidden="true"></i></button>
+                                                    </span>*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Game Info <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextArea("Description", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "1000", placeholder = "Game Info", id = "Description" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Game Rules <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextArea("Conditions", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", placeholder = "Conditions", id = "Conditions" })
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    @Html.CheckBox("IsComplimentary", htmlAttributes: new { id = "IsComplimentary", value = 1 })
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Age Required? <span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.CheckBox("IsAgeRequire", htmlAttributes: new { id = "IsAgeRequire", value = 1 })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Age Condition <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.DropDownList("AgeCondition", new List<SelectListItem>() { new SelectListItem { Text = "You must be 18 years and above to enter into the contest.", Value = "1" }, new SelectListItem { Text = "You must be 21 years and above to enter into the contest.", Value = "2" } }, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Status <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.DropDownList("IsActive", new List<SelectListItem>() { new SelectListItem { Text = "Active", Value = "1" }, new SelectListItem { Text = "Inactive", Value = "0" } }, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group form-actions">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-9">
+                                                <button class="btn vd_btn vd_bg-green vd_white" type="submit"><i class="icon-ok"></i>Save</button>
+                                                @Html.ActionLink("Cancel", "View", new { controller = "SwipeandWin" }, new { @class = "btn btn-danger" })
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-4">
+                                    @*@if (!string.IsNullOrEmpty(Model.QRCode))
+                                        {*@
+                                    <div class="form-group vb">
+                                        <div class="col-sm-12 controls pl-0 text-center">
+                                            <img id="imgqrcode" src="@Url.Content(Model.QrcodePath)" class="qrimg" /><br />
+                                            <button class="btn btn-primary searchrowbtn mt-10 text-center" type="button" onclick="QRdownload('pdf','@Model.QRCode', '@Model.QrcodePath','@Model.Title','@Model.Description');"><i class="icon-ok"></i>Download QR Code</button>
+                                        </div>
+                                    </div>
+                                    @*}*@
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<input type="hidden" id="attributeval" value="@Model.Attributes1" />
+
+@*<link href="@Url.Content(Globalsettings.admincsspath("daterangepicker-bs3.css?v=1.0.0"))" rel="stylesheet" type="text/css">*@
+<link href="@Url.Content(Globalsettings.admincsspath("bootstrap-multiselect.css"))" rel="stylesheet" type="text/css">
+<link href="@Url.Content(Globalsettings.admincsspath("bs-datetime.css"))" rel="stylesheet" />
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("bootstrap-multiselect.js"))"></script>
+@*<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("daterangepicker.js?v=1.0.0"))"></script>*@
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("moment.min.js?v=1.0.0"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.unobtrusive.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("inputmask.js"))"></script>
+<script src="@Url.Content(Globalsettings.adminjspath("bootstrap-datepicker.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("swipeandwin.js"))"></script>
+
+
+<script>
+    $(document).ready(function () {
+        GetSwipeandWin();
+        if ($("#TotalPlayed").val() != 0) {
+            $('.game').prop('readonly', true);
+            $('.gamed').prop('disabled', true);
+            alert("Game is in play mode, Please don't make changes.");
+        }
+    });
+    function AgeCondition() {
+        if ($("#IsAgeRequire").is(":checked")) {
+            $('#agecond').css("display", "block");
+        }
+        else {
+            $('#agecond').css("display", "none");
+        }
+    }
+    //$('.date').datepicker({
+    //    format: 'dd-mm-yyyy',
+    //    startDate: '-3d'
+    //});
+    $('.date').datepicker({
+        format: 'dd-M-yyyy',
+        widgetPositioning: {
+            horizontal: 'right',
+            vertical: 'bottom'
+        },
+        // sideBySide: true,
+        icons: {
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-check',
+            clear: 'fa fa-trash',
+            close: 'fa fa-times'
+        }
+    });
+    $(function () {
+        if (window.jQuery().datetimepicker) {
+            $('.datetime').datetimepicker({
+                format: 'DD-MMM-YYYY hh:mm a',
+                widgetPositioning: {
+                    horizontal: 'right',
+                    vertical: 'bottom'
+                },
+                // sideBySide: true,
+                icons: {
+                    time: 'fa fa-clock',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-check',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            });
+
+            //$('.date').datetimepicker({
+            //    format: 'DD-MMM-YYYY',
+            //    widgetPositioning: {
+            //        horizontal: 'right',
+            //        vertical: 'bottom'
+            //    },
+            //    // sideBySide: true,
+            //    icons: {
+            //        date: 'fa fa-calendar',
+            //        up: 'fa fa-chevron-up',
+            //        down: 'fa fa-chevron-down',
+            //        previous: 'fa fa-chevron-left',
+            //        next: 'fa fa-chevron-right',
+            //        today: 'fa fa-check',
+            //        clear: 'fa fa-trash',
+            //        close: 'fa fa-times'
+            //    }
+            //});
+        }
+    });
+</script>
+

@@ -1,0 +1,38 @@
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.BAL.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.BAL.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.DAL.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\Dapper.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DbFactory.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\MySql.Data.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.DAL.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.csprojResolveAssemblyReference.cache
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.BAL.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.BAL.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.DAL.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\Dapper.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DbFactory.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\MySql.Data.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.DAL.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.csprojResolveAssemblyReference.cache
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.pdb
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.BAL.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.BAL.pdb
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.DAL.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\Dapper.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DbFactory.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\MySql.Data.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.DAL.pdb
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\bin\Debug\DIGITAL GAMIFY.Entities.pdb
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.csproj.AssemblyReference.cache
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.csproj.CoreCompileInputs.cache
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.csproj.CopyComplete
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.BAL\obj\Debug\DIGITAL GAMIFY.BAL.pdb

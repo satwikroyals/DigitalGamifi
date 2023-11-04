@@ -1,0 +1,340 @@
+﻿body {
+}
+
+ .adda {
+        width: 100%;
+        height: 34px;
+        border: 1px solid #00264b;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        background: #dff3f9;
+    }
+    /*Survey css start*/
+    .border-10 {
+        border-radius: 10px;
+    }
+
+    .h-150 {
+        min-height: 150px;
+    }
+
+    .qtext {
+        background-color: #00aaad;
+        color: #fff;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .adda {
+        width: 100%;
+        height: 34px;
+        border: 1px solid #00264b;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        background: #dff3f9;
+    }
+
+    .spimg {
+        width: 200px;
+        height: 100px;
+        border-radius: 10px;
+    }
+
+    .checkmarkone {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        background-color: #707176;
+        margin-top: 3px;
+        border-radius: 50%;
+    }
+
+    .custom-checkbox:hover input ~ .checkmarkone {
+        background-color: #707176;
+    }
+
+    .custom-checkbox input:checked ~ .checkmarkone {
+        background-color: #009cc1;
+    }
+
+    .paborder {
+        border-bottom: 1px solid #00aaad;
+        margin-bottom: 5px;
+    }
+
+    .border-right {
+        border-right: 0px !important;
+    }
+
+    .pre-back {
+        color: #000;
+        border-bottom: 2px solid #000;
+        font-size: 16px;
+        font-family: BebasNeue;
+        text-decoration: none;
+    }
+
+    .preview-btn-four {
+        width: 45px;
+        height: 45px;
+        background-color: #00aaad;
+        border-radius: 50%;
+        color: #fff;
+        padding: 0px;
+    }
+
+    .email-img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: 200px !important;
+        position: relative;
+        overflow: hidden;
+        background-color: #dbedf6;
+        color: #ecf0f1;
+        border: 1px solid #00264b;
+        border-radius: 4px;
+    }
+
+        .email-img input {
+            max-width: 100%;
+            height: 100px;
+            position: absolute;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .email-img label {
+            position: absolute;
+            z-index: 5;
+            opacity: 0.8;
+            cursor: pointer;
+            background-color: #bdc3c7;
+            width: 400px !important;
+            height: 50px;
+            font-size: 20px;
+            line-height: 50px;
+            text-transform: uppercase;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            text-align: center;
+        }
+
+    .survey-preview {
+        position: absolute;
+        top: 90px;
+        left: 38px;
+        width: 205px;
+        over flow-y: auto;
+        height: 455px;
+        over flow-x: hidden;
+    }
+
+    ol.list-style {
+        list-style-type: lower-alpha;
+        list-style: none;
+    }
+
+    .survey-topdiv {
+        margin-left: -7px;
+        margin-right: -7px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        margin-top: -2px;
+    }
+
+    .survey-bottomdiv {
+        height: 40px;
+        margin-left: -6px;
+        margin-right: -6px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 16px;
+        position: absolute;
+        bottom: 0;
+        width: 217px;
+    }
+
+    .qpreviewdiv {
+        overflow: hidden;
+    }
+
+    .qpreviewa {
+        margin-right: -25px; /* maximum width of scrollbar */
+        padding-right: 20px !important; /* maximum width of scrollbar */
+        overflow-y: scroll;
+    }
+
+
+
+    [class*="answer-fieldlist-"] {
+        list-style: none;
+    }
+
+    [class*="answer-fieldlist"] li {
+        position: relative;
+        counter-increment: counter 1 !important;
+    }
+
+        [class*="answer-fieldlist"] li::after {
+            position: absolute;
+            content: counter(counter,lower-alpha);
+            font-size: 0.9em;
+            background-color: #00aaad;
+            color: white;
+            width: 27px;
+            height: 34px;
+            top: 0;
+            left: 5px;
+            z-index: 10;
+            line-height: 32px;
+            font-weight: bold;
+            text-align: center;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+    /*.nobg {
+        background: none !important;
+        background-color: transparent !important;
+    }*/
+    .mb-3 {
+        padding-bottom:5px;
+    }
+    .surveyans-ctrl {
+        padding-left: 36px !important;
+    }
+
+        .surveyans-ctrl:focus, .surveyans-ctrl:hover {
+            background: none !important;
+            background-color: transparent !important;
+            outline: none !important;
+            /*webkit-box-shadow: none !important;*/
+            box-shadow: none !important;
+            -webkit-transition: none !important;
+            -o-transition: none !important;
+            transition: none !important;
+        }
+
+    .remove {
+        cursor: pointer !important;
+    }
+
+    .survey-question {
+        counter-increment: questioncounter 1;
+        position: relative;
+        padding-bottom: 30px;
+    }
+
+        .survey-question::before {
+            position: absolute;
+            content: "Question " counter(questioncounter) ".";
+            font-size: 16px;
+            color: #00264b;
+            width: auto;
+            height: 25px;
+            top: -30px;
+            padding: 0 0 0 5px;
+            left: 0;
+            z-index: 1;
+            line-height: 23px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .survey-question:after {
+            content: " ";
+            display: block;
+            clear: both;
+        }
+
+        .survey-question .remove_field {
+            position: absolute;
+            top: -25px;
+            right: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 0.8em;
+        }
+
+    .adda {
+        color: #337ab7 !important;
+        text-align: left !important;
+        font-weight: 800;
+    }
+
+        .adda:hover, .adda:focus {
+            color: #23527c !important;
+        }
+
+    .answers .adda {
+        position:absolute;
+        width: 91% !important;
+        margin-left: 16px !important;
+    }
+
+    ol.dsanslistedit {
+        margin-bottom: 5px !important;
+    }
+
+    .survey-question:last-child {
+        padding-bottom: 10px !important;
+    }
+
+    .answers {
+        padding-top: 0.5rem !important;
+    }
+
+    button:focus {
+        outline: none !important;
+    }
+
+    .preview-btn-four {
+        font-size: 12px !important;
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .qpreviewa {
+        height: 115px;
+        overflow: auto;
+        padding-top: 2px !important;
+    }
+
+    .qpreview {
+        text-align: left;
+    }
+    /* width */
+    .qpreviewa::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    .qpreviewa::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    .qpreviewa::-webkit-scrollbar-thumb {
+        background: #a3080c;
+    }
+
+        /* Handle on hover */
+        .qpreviewa::-webkit-scrollbar-thumb:hover {
+            background: #a3080c;
+        }
+    /*Survey css end*/

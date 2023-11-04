@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A0C47D17-101F-4904-9F43-913951D5E415}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DIGITAL_GAMIFY.DAL</RootNamespace>
+    <AssemblyName>DIGITAL GAMIFY.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\..\..\DIGITAL GAMIFY\DIGITAL GAMIFY.DAL\bin\Debug\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DbFactory">
+      <HintPath>..\..\..\DIGITAL GAMIFY\DIGITAL GAMIFY.DAL\bin\Debug\DbFactory.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\DIGITAL GAMIFY\DIGITAL GAMIFY.DAL\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminData.cs" />
+    <Compile Include="BusinessData.cs" />
+    <Compile Include="CommunicationData.cs" />
+    <Compile Include="CustomerData.cs" />
+    <Compile Include="GlobalData.cs" />
+    <Compile Include="NotificationData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuizData.cs" />
+    <Compile Include="ReportData.cs" />
+    <Compile Include="Repositiories\DapperRepositry.cs" />
+    <Compile Include="SmartQuizData.cs" />
+    <Compile Include="SpinData.cs" />
+    <Compile Include="Surveydata.cs" />
+    <Compile Include="SweepstakesData.cs" />
+    <Compile Include="SwipeandWinData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DIGITAL GAMIFY.Entities\DIGITAL GAMIFY.Entities.csproj">
+      <Project>{b47aeee9-ea6d-4b93-9250-72ee469512cc}</Project>
+      <Name>DIGITAL GAMIFY.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

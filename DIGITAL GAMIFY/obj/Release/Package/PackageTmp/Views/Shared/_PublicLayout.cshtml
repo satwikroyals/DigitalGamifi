@@ -1,0 +1,204 @@
+﻿@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code;
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Welcome to Digital Gamify</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="@Url.Content(Globalsettings.publicimagespath("favicon.png"))" rel="icon">
+    <link href="@Url.Content(Globalsettings.publicimagespath("favicon.png"))" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="@Url.Content(Globalsettings.publicvendorfolderpath("bootstrap/css/bootstrap.min.css"))" rel="stylesheet">
+    <link href="@Url.Content(Globalsettings.publicvendorfolderpath("icofont/icofont.min.css"))" rel="stylesheet">
+    <link href="@Url.Content(Globalsettings.publicvendorfolderpath("boxicons/css/boxicons.min.css"))" rel="stylesheet">
+    <link href="@Url.Content(Globalsettings.publicvendorfolderpath("animate.css/animate.min.css"))" rel="stylesheet">
+    <link href="@Url.Content(Globalsettings.publicvendorfolderpath("venobox/venobox.css"))" rel="stylesheet">
+    <link href="@Url.Content(Globalsettings.publicvendorfolderpath("owl.carousel/assets/owl.carousel.min.css"))" rel="stylesheet">
+    <link href="@Url.Content(Globalsettings.publicvendorfolderpath("aos/aos.css"))" rel="stylesheet">
+    <link href="@Url.Content(Globalsettings.publicvendorfolderpath("remixicon/remixicon.css"))" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="@Url.Content(Globalsettings.publiccsspath("style.css"))" rel="stylesheet">
+    <link href="~/content/public/css/theme.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="shortcut icon" href="@Url.Content(Globalsettings.adminthemeimagepath("favicon.ico"))">
+    <!-- CSS -->
+    @*<link href="@Url.Content(Globalsettings.admincsspath("theme.min.css"))" rel="stylesheet" type="text/css">*@
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="css/font-awesome-ie7.min.css"><![endif]-->
+    <!--[if IE]> <link href="css/ie.css" rel="stylesheet" > <![endif]-->
+    <!--Js-->
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.min.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("bootstrap.min.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("global.js"))"></script>
+    <script>
+        //global javascript variable to get websiteurl,websiteurlapi .
+        var websiteurl = '@Globalsettings.GetWebSiteUrl()';
+        var websiteurlapi = '@Globalsettings.GetWebSiteUrlApi()';
+    </script>
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <a href="index.html"><img src="@Url.Content(Globalsettings.publicimagespath("gamesnatcherz.png"))" class="header-logo"></a>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                    <li><a href="@Url.Action("Login","Business")">Business Login</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#registration">Registration</a></li>
+
+                </ul>
+            </nav><!-- .nav-menu -->
+
+
+
+        </div>
+    </header><!-- End Header -->
+   @RenderBody()
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>Contact us</h3>
+                        <p>
+                            assist.gamesnatcherz@gmail.com
+                        </p>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="@Url.Action("Login","Business")">Business</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Contact </a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4></h4>
+
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Join Our Newsletter</h4>
+
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container d-md-flex py-4">
+
+            <div class="mr-md-auto text-center text-md-left">
+                <div class="copyright">
+                    Copyright © <a href="#">Game Snatcherz</a>. All rights reserved.
+                </div>
+                <div class="credits">
+
+                </div>
+            </div>
+            <div class="social-links text-center text-md-right pt-3 pt-md-0">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("jquery/jquery.min.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("bootstrap/js/bootstrap.bundle.min.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("jquery.easing/jquery.easing.min.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("php-email-form/validate.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("jquery-sticky/jquery.sticky.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("isotope-layout/isotope.pkgd.min.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("venobox/venobox.min.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("waypoints/jquery.waypoints.min.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("owl.carousel/owl.carousel.min.js"))"></script>
+    <script src="@Url.Content(Globalsettings.publicvendorfolderpath("aos/aos.js"))"></script>
+    @*<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.min.js"))"></script>*@
+    @*<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("bootstrap.min.js"))"></script>*@
+    @*<script src="~/Content/js/business.js"></script>
+    <script src="~/Content/js/global.js"></script>*@
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.min.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.unobtrusive.min.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("inputmask.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("business.js"))"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.34&sensor=false&key=@Globalsettings.GetGoogleMapsApiKey()&libraries=places"></script>
+    <!-- Template Main JS File -->
+    <script src="@Url.Content(Globalsettings.publicjspath("main.js"))"></script>
+
+
+    <script>
+      
+        jQuery(window).ready(function () {
+            try {
+                var input = document.getElementById('Address');
+                var options = {
+                    types: ['(cities)'],
+                    // componentRestrictions: { country: 'aus' }
+                };
+                var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+                google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                    getLocation();
+                    //  fillInAddress();
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        });
+
+
+        var getLocation = function () {
+            var address = $('#Address').val();
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function (results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+                    $('#Latitude').val(latitude);
+                    $('#Longitude').val(longitude);
+                }
+                else {
+                    $('#Latitude').val(0);
+                    $('#Longitude').val(0);
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

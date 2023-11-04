@@ -1,0 +1,167 @@
+﻿@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code;
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<!-- Specific Page Data -->
+<!-- End of Data -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>@Globalsettings.GetProjectName() </title>
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="@Url.Content(Globalsettings.adminthemeimagepath("favicon.ico"))">
+    <!-- CSS -->
+    <link href="@Url.Content(Globalsettings.admincsspath("theme.min.css"))" rel="stylesheet" type="text/css">
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="css/font-awesome-ie7.min.css"><![endif]-->
+    <!--[if IE]> <link href="css/ie.css" rel="stylesheet" > <![endif]-->
+    <style>
+        p{font-weight:normal !important}
+    </style>
+
+</head>
+
+<body id="pages" class="full-layout no-nav-left no-nav-right  nav-top-fixed background-login responsive remove-navbar login-layout clearfix" data-active="pages " data-smooth-scrolling="1" style="">
+    <div class="vd_body">
+        <div class="content">
+            <div class="container">
+                <!-- Middle Content Start -->
+                <div class="vd_content-wrapper">
+                    <div class="vd_container">
+                        <div class="vd_content clearfix">
+                            <div class="vd_content-section clearfix" style="padding: 0px;">
+                                <div class="vd_login-page">
+                                    <div class="heading clearfix" style="margin:0">
+                                        <div class="logo">
+                                            @*<h2 class="mgbt-xs-5" style="font-size: 35px; color: #fff;">@Globalsettings.GetProjectName()</h2>*@
+                                            <img src="/Content/images/logo.png" class="logoimg" style="height:50px !important" />
+                                        </div>                                     
+                                    </div>
+                                  
+                                    <!-- Panel Widget -->
+                                </div>
+                                <!-- vd_login-page -->
+                            </div>
+                            <!-- .vd_content-section -->
+                        </div>
+                        <div style="margin:30px 10%">
+                            <p><b>PRIVACY POLICY</b></p>
+                            <p>GameSnatcherz is committed to protecting the privacy of personal information of its customers and users of all its products and services in accordance with the current Australian privacy laws.</p>
+                            <p>This Privacy Policy sets out GameSnatcherz approach to how we handle personal information and includes how we collect, use, disclose and keep secure your personal information, whether provided to us via our websites, applications, this website, directly or other means.</p>
+                            <p>From time to time, we review and update this Privacy Policy so please check this website periodically to stay informed of any updates. All personal information collected and held by us will be governed by the most recently updated Privacy Policy.</p>
+                            <p><b>Definitions</b></p>
+                            <p>In this policy:</p>
+                            <p>Personal Information has the meaning given under the Privacy Act but, in short, means information or an opinion relating to an individual that can be used to identify that individual.</p>
+                            <p>Privacy Act means the Privacy Act 1988 (Cth) including the Privacy Principles (as amended from time to time).</p>
+                            <p>Sensitive Information has the same meaning as under the Privacy Act.</p>
+                            <p>Services means the mobile or other web services and commercial nature that we provide.</p>
+                            <p>Website means www.gamesnatcherz.com and other websites and forms of social media where you post comments or we interact with you.</p>
+                            <p>Collection Of Personal Information By GameSnatcherz</p>
+                            <p>We only collect personal information from you that we reasonably require for one or more of our business functions or activities, and will do so by lawful and fair means.</p>
+                            <p>The kinds of personal information we may collect from you will depend on what type of interaction you have with us.</p>
+                            <p>However, it may include, among other things:</p>
+                            <p>Personal information you provide to us when you participate in any of the following on our GameSnatcherz platform and or websites - promotions, competitions, promotional activity, surveys, market research, subscribe to our mailing list or interact or follow our social media pages like Facebook, Twitter, Instagram, Yammer and others.This information may include, your name, postal address, email address, telephone number.</p>
+                            <p>Personal information you provide to us via our mobile engagement platform, GameSnatcherz. This information may include, for example, your name, postal address, email address, telephone number,IP address and credit card details;</p>
+                            <p>If you are applying for a position with GameSnatcherz , we will collect information as outlined in the section below entitled "Employment Applications";</p>
+                            <p>If you are applying to become a customer of GameSnatcherz, we may collect information as outlined in the section below entitled "Customer Applications".</p>
+                            <p>You have the option of not identifying yourself, or of using a pseudonym, when dealing with us in any matter relating to privacy or your information being held, unless we are required or authorised by or under an,or a court/tribunal order, to deal with individuals who have identified themselves or is impracticable for us to deal with individuals who have not identified themselves or who have used a pseudonym.</p>
+                            <p>In some circumstances, we may collect personal information from third parties such as credit reporting agencies or our marketing agencies. Where we do, we will ensure that we act in accordance with relevant government compliance.</p>
+                            <p>With the exception of when you apply for a position with GameSnatcherz, we will not collect sensitive information about you (such as information about your racial or ethnic origins or political or religious beliefs) unless you have consented to such collection or the collection is required by law.</p>
+                            <p>Databases for processing customer orders, enquiries or feedback; or</p>
+                            <p>Email or SMS databases for marketing communications; or</p>
+                            <p>Cloud backups of emails, project related files and other communications with you.</p>
+                            <p>How Your Personal Information Is Stored</p>
+                            <p>We take reasonable steps to protect your personal information from loss or unauthorised access. Unfortunately no data transmission over the Internet can be guaranteed as totally secure. Accordingly, although we strive to protect such information, we do not warrant the security of any information you transmit to us or from our online services and you use these services at your own risk.</p>
+                            <p>We only keep your personal information for as long as it is required for the purpose for which it was collected or as otherwise required by law.</p>
+                            <p>We will take appropriate measures to destroy or permanently de-identity your personal information if we no longer need to retain it. These measures may vary depending on the type of information concerned, the way it was collected and how it was stored.</p>
+                            <p><b>Solicited Information</b></p>
+                            <p>We will not collect personal information (other than sensitive information) unless the information is reasonably necessary for, or directly related to, one or more of our functions or activities.</p>
+                            <p>We will only collect sensitive information about you as a user of your products and services, or if you are a customer of one of our Customers:</p>
+                            <p>- if you consent to the collection of the information and;</p>
+                            <p>- if the information is reasonably necessary for, or directly related to, one or more of either what we do as a company or the services that we offer.</p>
+                            <p>The circumstances in which we may collect sensitive information includes:</p>
+                            <p>- where it is required or authorised by or under an Australian law or a court/tribunal order; or</p>
+                            <p>- where we are permitted to do so; or</p>
+                            <p>- where there a health situation exists in relation to the collection of the information.</p>
+                            <p><b>Unsolicited Information</b></p>
+                            <p>Where we receives personal information that we did not solicit, we will within a reasonable period after receiving the information, determine whether or not we could have collected the information and if we had solicited the information.</p>
+                            <p>As soon as reasonably possible, and only if it is lawful and reasonable to do so, destroy the unsolicited information or ensure that the information is de-identified.</p>
+                            <p>How Your Personal Information Will Be Used</p>
+                            <p>We collect your personal information so that we can use it to provide products and services to you, or improve on those products and services which include, among other things:</p>
+                            <p>processing any orders you place within our platform,GameSnatcherz, or in our Customer stores or through our electronic or mobile ordering system, providing you with email or SMS confirmation of your orders, providing you with our products and services and processing any refunds where applicable;</p>
+                            <p>where you provide feedback about our products and/or services and we respond to feedback;</p>
+                            <p>conducting, and allowing you to participate in our Customer&rsquo;s promotions, competitions and surveys, and our promotions, competitions, and surveys;</p>
+                            <p>promoting and marketing our current and future products and services to you, informing you of upcoming events and special promotions and offers and analysing our products and services so as to improve and develop new products and services;</p>
+                            <p>facilitating our internal business operations, including fulfilment of any legal and regulatory requirements;</p>
+                            <p>processing and considering your employment application and conducting reference checks, where you are apply for employment with us;</p>
+                            <p>We may also use your personal information for other purposes not listed above which will be made clear to you at the time we collect your personal information, or for such purposes as may be required or permitted by law.</p>
+                            <p>Disclosure Of Personal Information To Third Parties</p>
+                            <p>We may disclose personal information we collect from you:</p>
+                            <p>to our related companies, suppliers, consultants, contractors or agents for the purposes set out in the section above entitled &ldquo;How Your Personal Information Will Be Used&rdquo; or for other purposes directly related to the purpose for which the personal information is collected. For example, your name and email address may be disclosed to one of our Customers to enable that them to respond to your request for information about a particular product they provide;</p>
+                            <p>to relevant Federal, State, Territory food safety authorities and health authorities for the purpose of investigating a food safety or health issue;</p>
+                            <p>where the law requires or authorises us to do so;</p>
+                            <p>to others that you have been informed of at the time any personal information is collected from you;</p>
+                            <p>with your consent (express or implied) to others.</p>
+                            <p><b>Opting In or Out</b></p>
+                            <p>the point we collect information from you, you may be asked to &ldquo;opt in&rdquo; to consent to us using or disclosing your personal information. You will generally be given the opportunity to &ldquo;opt out&rdquo; from receiving communications from us. You may &ldquo;opt out&rdquo; from receiving these communications by clicking on an unsubscribe link at the end of an email or by contacting us with this request.</p>
+                            <p><b>Third Party Websites</b></p>
+                            <p>We may offer links to websites that are operated by third parties. If you visit one of these linked websites, you should review their privacy and other policies. We are not responsible for the policies and practices of third parties, including the privacy policies of our Customers.</p>
+                            <p>Access and Correction of Your Personal Information</p>
+                            <p>You may, at any time, request access and correction to any personal information we hold about you by contacting us (refer to Privacy Queries section below). If you make an access request, we may ask you to verify your identity and put your request in writing for security reasons. We may charge a reasonable administration fee to cover the costs of meeting your request.</p>
+                            <p>Refusal to Correct Information</p>
+                            <p>If we refuse to correct the personal information as requested by you, we must give you a written notice that sets out:</p>
+                            <p>- the reasons for the refusal except to the extent that it would be unreasonable to do so; and</p>
+                            <p>- the mechanisms available to complain about the refusal; and</p>
+                            <p>- any other matter prescribed by the Privacy regulations.</p>
+                            <p>Dealing With Requests</p>
+                            <p>If a request is made under the Privacy Act (1988), we will respond to the request:</p>
+                            <p>- within 30 days after the request is made; or</p>
+                            <p>- within a reasonable period after the request is made; and will must not charge you for the making of the request, for correcting the personal information or for associating the statement with the personal information (as the case may be).</p>
+                            <p><b>Privacy Queries</b></p>
+                            <p>If you have any questions or complaints about how we handle your personal information or a breach of the Privacy Principles, please contact us at:</p>
+                            <p>For Contact Privacy Officer send Email,</p>
+                            <p><strong>Email: assist.gamesnatcherz@gmail.com</strong></p>
+                            <p>Our Privacy Officer will consider your question or complaint and respond to you in a reasonable timeframe.</p>
+                        </div>
+                        <!-- .vd_content -->
+                    </div>
+                    <!-- .vd_container -->
+                </div>
+                <!-- Middle Content End -->
+            </div>
+            <!-- .container -->
+        </div>
+        <!-- .content -->
+        <!-- Footer Start -->
+        <footer class="footer-2" id="footer">
+            <div class="vd_bottom ">
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-xs-12">
+                            <div class="copyright text-center" style="margin-top: 5px;">
+                                @Globalsettings.GetCopyRight()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer End -->
+    </div>
+    <!--Javascirpt files reqiured for website-->
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.min.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("bootstrap.min.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("global.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.min.js"))"></script>
+    <script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.unobtrusive.min.js"))"></script>
+
+</body>
+</html>

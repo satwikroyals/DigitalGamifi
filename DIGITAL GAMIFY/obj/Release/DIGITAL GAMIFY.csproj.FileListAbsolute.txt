@@ -1,0 +1,64 @@
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.dll.config
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.BAL.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.DAL.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\Newtonsoft.Json.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Net.Http.Formatting.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Helpers.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Http.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Http.WebHost.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Razor.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.Deployment.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.Razor.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.BAL.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.DAL.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Razor.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.Deployment.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.Razor.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Helpers.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\Newtonsoft.Json.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Net.Http.Formatting.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Http.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Http.WebHost.xml
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\obj\Release\DIGITAL GAMIFY.csprojResolveAssemblyReference.cache
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\obj\Release\DIGITAL GAMIFY.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\obj\Release\DIGITAL GAMIFY.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Mvc.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Mvc.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.dll.config
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.BAL.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.DAL.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\Newtonsoft.Json.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Net.Http.Formatting.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Helpers.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Http.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Http.WebHost.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Mvc.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Razor.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.Deployment.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.Razor.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.BAL.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.DAL.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Razor.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.Deployment.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Webpages.Razor.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Helpers.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Mvc.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\Newtonsoft.Json.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Net.Http.Formatting.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Http.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\bin\System.Web.Http.WebHost.xml
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\obj\Release\DIGITAL GAMIFY.csprojResolveAssemblyReference.cache
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\obj\Release\DIGITAL GAMIFY.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY\obj\Release\DIGITAL GAMIFY.pdb

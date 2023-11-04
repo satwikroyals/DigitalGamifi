@@ -1,0 +1,145 @@
+﻿
+@{
+    Layout = null;
+}
+@using DIGITAL_GAMIFY.Code;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Swipe & WIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="~/customercontent/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/customercontent/css/styles.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        var websiteurlapi = '@Globalsettings.GetWebSiteUrlApi()';
+        var websiteurl = '@Globalsettings.GetWebSiteUrl()';
+    </script>
+</head>
+<body>
+    <div class="main-row">
+        <div class="">
+            <div class="">
+                <div class="frame-border">
+                    
+                    <nav class="navbar navbar-light b-color">
+                        <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="fa fa-align-justify"></span>
+                        </button>
+
+                        <button class="invisible px-3"></button>
+
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                <li class="nav-item active">
+                                    <a class="nav-link text-light" href="#">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#">Link</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+
+                    <div class="container-fluid p-0 content-h boxscroll do-nicescrol4">
+                        <div class="wrap">
+
+                            <div class="mt-4 mb-1">
+                                <div class="mt-3 mb-1"><img src="~/Content/images/logo.png" class="img-fl  uid w-50" height="100px"></div>
+                                <h4 class="t-color">Hi ,</h4>
+                                <input type="hidden" id="gid" value="@ViewBag.gid" />
+                                <input type="hidden" id="businessid" value="@ViewBag.bid" />
+                                
+                                <h6 class="px-3 py-1">Please rub your finger over the panel below to play</h6>
+                                <div class="my-2">
+                                    <div class="scratch" style="z-index:1000;position: absolute;margin:0 auto;
+  -webkit-transform: translate(-50%, 0%);
+  -moz-transform: translate(-50%, 0%);    /* Older Gecko browser */
+  -ms-transform: translate(-50%, 0%);     /* IE9+ */
+  -o-transform: translate(-50%, 0%);
+  transform: translate(7%, 0%);text-align:center;">
+
+                                    </div>
+                                </div>
+                                <div style="margin-top:200px;display:none" id="prizedetails">
+                                    <h6 class="px-3 py-3">Congratulations you have own </br><span id="prizemessage"></span></h6>
+                                    <input type="hidden" id="prizeid" value="4" />
+                                    <input type="hidden" id="prizenumber" value="4">
+                                    <a href="#" class="btn btn-info g-btn px-5 rounded-0" onclick="RedeemPrize()">Redeem Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="circle-button"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="~/customercontent/js/jquery-3.5.1.slim.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+    <script type="text/javascript" src="~/Content/js/jquery.min.js"></script>
+    <script src="~/customercontent/js/popper.min.js"></script>
+    <script src="~/customercontent/js/bootstrap.min.js"></script>
+    <script src="~/customercontent/js/global.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.js"></script>
+    <script type="text/javascript">
+        $(".do-nicescrol4").niceScroll(".wrap");
+    </script>
+    <script type="text/javascript">$("body").niceScroll();</script> -->
+    <img src="~/customercontent/images/3.png" hidden="hidden" id="swipe" />
+    <script src="~/customercontent/js/wScratchPad.js"></script>
+    <script>
+        var gid = $('#gid').val();
+        //var otletid = $('#OutletId').val();
+        //var cid = $('#CustomerId').val();
+
+        getplaygamebyid(gid);
+        function RedeemPrize()
+        {
+            var gid = $('#gid').val();
+            var pznum = $('#prizenumber').val();
+            var businessid = $('#businessid').val();
+            window.location.href = "@Url.Action("EndGame", "customer")?GId=" + gid + "&PZNum=" + pznum + "&OutletId=" + businessid;
+        }
+        function ChkScratch(p) {
+            if (p > 50) {
+                $('#prizedetails').css('display', 'block');
+                //$('#prizedetails').removeClass('hide');
+            }
+        }
+
+        function getplaygamebyid(gid) {
+            gl.ajaxreq(websiteurlapi + 'GetSwipeGamePlaydetails', 'get', { Id: gid, CId: 0 }, function (response) {
+                if (response.Status) {
+                    if (response.Success) {
+                        var data = response.Data;
+                        $('#prizenumber').val(data.PrizeDetails.PrizeNumber);
+                        $('#prizemessage').html(data.PrizeDetails.PrizeMessage);
+                        var sp2 = $(".scratch").wScratchPad({
+                            scratchDown: function (e, percent) { ChkScratch(percent) },
+                            scratchMove: function (e, percent) { ChkScratch(percent) },
+                            scratchUp: function (e, percent) { ChkScratch(percent) },
+                            image: data.PrizeDetails.PrizePath,
+                            image2: $("#swipe").attr('src'),
+                            width: 300,
+                            height: 260
+                        });
+
+                    }
+                }
+            }, '', '', '', '', false, false);
+        }
+    </script>
+</body>
+</html>

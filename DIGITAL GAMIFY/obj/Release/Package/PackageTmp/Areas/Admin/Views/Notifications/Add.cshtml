@@ -1,0 +1,87 @@
+﻿@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code;
+@model DIGITAL_GAMIFY.Entities.NotificationEntity
+
+
+@{
+    ViewBag.Title = "Add Notification";
+}
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("notifications.js"))"></script>
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header mylinks">
+                    <ul class="breadcrumb">
+                        <li>Notifications </li>
+                        <li class="active">Add/Edit</li>
+                    </ul>
+                    <div class="vd_panel-menu hidden-sm hidden-xs resize-content" data-intro="" data-step="5" data-position="left">
+                        <div data-action="remove-navbar" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-navbar-button menu"><i class="fa fa-arrows-h"></i></div>
+                        <div data-action="remove-header" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-header-button menu"><i class="fa fa-arrows-v"></i></div>
+                        <div data-action="fullscreen" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="fullscreen-button menu"><i class="glyphicon glyphicon-fullscreen"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd_content-section clearfix subdiv">
+                <div class="col-lg-12 ">
+                    <div class="row" id="advanced-input">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="row" id="auto-complete-input">
+                        <div class="col-md-12">
+                            <div class="panel widget">
+                                <div class="panel-heading vd_bg-grey">
+                                    <h3 class="panel-title"><span class="menu-icon"><i class="fa fa-bell-o"></i></span>Add/Edit Notifications </h3>
+                                </div>
+                                <div class="panel-body form-horizontal">
+                                    @using (Html.BeginForm("Add", "Notifications", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.TextBoxFor(m => m.NotificationId, null, new { @class = "hide" })
+                                        @Html.AntiForgeryToken();
+                                        @Html.ValidationSummary(false, "", new { @class = "alert alert-danger err" })
+                                        <div class="clearfix"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Title <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextBoxFor(m => m.Title, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "450", placeholder = "Title", id = "Title" })                                              
+                                            </div>
+                                        </div>                                       
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Notification <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.TextArea("Text", null, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds", maxlength = "3500", placeholder = "Notification", id = "Text" })
+                                            </div>
+                                        </div>                                      
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Status <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                @Html.DropDownList("IsActive", new List<SelectListItem>() { new SelectListItem { Text = "Active", Value = "1" }, new SelectListItem { Text = "Inactive", Value = "0" } }, htmlAttributes: new { @class = "width-70 width-110 myfilds mytxtfilds" })
+                                            </div>
+                                        </div>                                   
+                                        <div class="form-group form-actions">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-9">
+                                                <button class="btn vd_btn vd_bg-green vd_white" type="submit"><i class="icon-ok"></i>Save</button>
+                                                @Html.ActionLink("Cancel", "View", new { controller = "Notifications" }, new { @class = "btn btn-danger" })
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.unobtrusive.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("inputmask.js"))"></script>
+

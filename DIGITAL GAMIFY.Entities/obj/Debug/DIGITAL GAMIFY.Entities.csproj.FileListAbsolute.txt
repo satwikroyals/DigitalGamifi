@@ -1,0 +1,16 @@
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Debug\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\admin\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.csprojResolveAssemblyReference.cache
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Debug\DIGITAL GAMIFY.Entities.pdb
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.csprojResolveAssemblyReference.cache
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Kansolve projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.pdb
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\bin\Debug\DIGITAL GAMIFY.Entities.pdb
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.csproj.AssemblyReference.cache
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.csproj.CoreCompileInputs.cache
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.dll
+D:\Projects\DIGITAL GAMIFY\DIGITAL GAMIFY.Entities\obj\Debug\DIGITAL GAMIFY.Entities.pdb

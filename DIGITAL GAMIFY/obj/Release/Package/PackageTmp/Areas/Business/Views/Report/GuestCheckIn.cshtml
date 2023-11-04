@@ -1,0 +1,466 @@
+﻿
+@{
+    ViewBag.Title = "GuestCheckIn";
+    Layout = "~/Areas/Business/Views/Shared/_LayoutBusiness.cshtml";
+}
+
+@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code;
+
+
+@*<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("notifications.js"))"></script>*@
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header mylinks">
+                    <ul class="breadcrumb">
+                        <li>Guest </li>
+                        <li class="active">View</li>
+                    </ul>
+                    <div class="vd_panel-menu hidden-sm hidden-xs resize-content" data-intro="" data-step="5" data-position="left">
+                        <div data-action="remove-navbar" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-navbar-button menu"><i class="fa fa-arrows-h"></i></div>
+                        <div data-action="remove-header" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-header-button menu"><i class="fa fa-arrows-v"></i></div>
+                        <div data-action="fullscreen" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="fullscreen-button menu"><i class="glyphicon glyphicon-fullscreen"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd_content-section clearfix subdiv">
+                <div class="col-lg-12 divsearch">
+                    <div class="col-lg-2">
+                        <label class="navpad"> <i class="fa fa-building-o iconcolr" aria-hidden="true"></i> Select Agegroup</label>
+                        <div class="form-group">
+                            <select data-placeholder="Not found" id="Agegroup">
+                                <option value="0">select</option>
+                                <option value="1">10-21</option>
+                                <option value="2">22-40</option>
+                                <option value="3">41-65</option>
+                                <option value="4">65+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="navpad"> <i class="fa fa-building-o iconcolr" aria-hidden="true"></i> Select Gender</label>
+                        <div class="form-group">
+                            <select class="" data-placeholder="Not found" id="gender">
+                                <option value="0">select</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="navpad"> <i class="fa fa-building-o iconcolr" aria-hidden="true"></i> Select GameType</label>
+                        <div class="form-group">
+                            <select data-placeholder="Not found" id="gtid">
+                                <option value="0">select</option>
+                                <option value="1">Swipe&Win</option>
+                                <option value="2">Text Quiz</option>
+                                <option value="3">Pic Quiz</option>
+                                <option value="4">Survey</option>
+                                <option value="5">Sweepstakes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="col-sm-10 control-label navpad">Search</label>
+                        <div class="input-group col-sm-12">
+                            <input type="text" placeholder="Search Name or ZipCode" id="search">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="navpad"></label>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary searchrowbtn mr-10" id="btnShow">Search</button>
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10" id="btnShowAll">Clear</button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 my-4">
+                        <div class="modal-footer1">
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10 exportToExcel" id="ExportToExcel" onclick="exceller()">Export To Excel</button>
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10" onclick="generate()">Export To Pdf</button>
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10" id="csv" onclick="exportCsv()">Export To csv</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 valerr"></div>
+                </div>
+
+                <div class="col-xs-12 hrline-break"><hr></div>
+                <div class="pageloader hide"></div><input type="hidden" id="BusinessId" value="@ViewBag.id" />
+
+
+                <div class="col-lg-12 tbbg2 pagecontent grid-pi history">
+                    <div class="col-lg-12 hide nodata dataerr" id="norec">
+                        No Guest Found.
+                    </div>
+                    <div id="tblgrid">
+                        <div class="col-lg-12 grid-i">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    Total Customers : <span id="totalrec">0</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    Page Size :
+                                    <select name="ddlpagesize" id="ddlpagesize" class="form-control ps">
+                                        <option>25</option>
+                                        <option>50</option>
+                                        <option>75</option>
+                                        <option>100</option>
+                                        <option>200</option>
+                                        <option>300</option>
+                                        <option>400</option>
+                                        <option>500</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-right">
+                                <div class="form-group" id="showpageinfo">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-right">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <div class="tblcontent">
+                            <div class="table-responsive">
+                                <table id="tbldataabs" class="mytbl table display dttbl table-striped table-hover">
+                                    <thead class="oc-thead">
+                                        <tr>
+                                            <th>Game Name</th>
+                                            <th class="col-lg-2">Name</th>
+                                            <th class="col-lg-4">Mobile</th>
+                                            <th class="col-lg-2">Email</th>
+                                            <th>Age Group</th>
+                                            <th>Gender</th>
+                                            <th>ZipCode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="oc-tbody" id="tbldata"></tbody>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="px-2 my-2 pull-right">
+                                <ul class="pagination m-0">
+                                    <li class="active"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+    </div>
+</div>
+    <table id="simple_table" class="hide table2excel">
+        <tr>
+            <th>Game Type</th>
+            <th>Game Title</th>
+            <th>Customer</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Age Group</th>
+            <th>Zipcode</th>
+            <th>Gender</th>
+        </tr>
+        <tbody class="oc-tbody" id="tbldatapdf"></tbody>
+    </table>
+
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.unobtrusive.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("inputmask.js"))"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
+    <script src="~/Content/tableToCsv.js"></script>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+    <script src="~/Content/tableHTMLExport.js"></script>
+    <script>
+        $('#csv').on('click', function () {
+            Exportdata();
+            $("#simple_table").tableHTMLExport({ type: 'csv', filename: 'Contestants.csv' });
+        })
+    </script>
+
+    <script>
+        try {
+            fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function (response) {
+                return true;
+            }).catch(function (e) {
+                var carbonScript = document.createElement("script");
+                carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+                carbonScript.id = "_carbonads_js";
+                document.getElementById("carbon-block").appendChild(carbonScript);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>*@
+<script>
+    $(document).ready(function () {
+        SetCustomersPage();
+    });
+    $('#selectAll').click(function (e) {
+        $(this).closest('table').find('td input:checkbox').prop('checked', this.checked);
+    });
+
+    function SetCustomersPage() {
+        var str = SetQueryStDefaultVal("_str", "");
+        $("#search").val(str);
+
+        var age = SetQueryStDefaultVal("_age", 0);
+        age = age == -1 ? 0 : age;
+
+        var gender = SetQueryStDefaultVal("_g", 0);
+        gender = gender == -1 ? 0 : gender;
+
+        var gtid = SetQueryStDefaultVal("_gt", 0);
+        gtid = gtid == -1 ? 0 : gtid;
+
+        var pi = SetQueryStDefaultVal("_pi", 1);
+        var ps = SetQueryStDefaultVal("_ps", 25);
+        $("#ddlpagesize").val(ps);
+
+
+        $('#btnShowAll').on("click", function (event) {
+            window.location.href = GetUrlWithNoQueryStrings();
+        });
+
+        //Search event handler.
+        $('#btnShow').on("click", function (event) {
+            var dateerror = CheckDatesDiff($('#from').val(), $('#to').val(), 10, 0);
+            var errObj = [];
+            var hasErrors = false;
+            //if ($("#ddlsearchbusiness").val() == null || $("#ddlsearchbusiness").val() == '-1') {
+            //    hasErrors = true;
+            //    errObj.push('Please select Business');
+            //}
+            if (dateerror != "") {
+                hasErrors = true;
+                errObj.push(dateerror);
+            }
+            if (hasErrors == false) {
+                window.location.href = GetUrlWithNoQueryStrings() + "?_f=" + $("#from").val() + "&_t=" + $("#to").val() + "&_pi=" + pi + "&_str=" + $("#search").val() + "&_age=" + $("#Agegroup").val() + "&_g=" + $("#gender").val() + "&_gt=" + $("#gtid").val();
+            }
+            SearchVsdisplay(errObj);
+        });
+
+        SetViewNotificationGrid(pi, ps);
+
+        function SetViewNotificationGrid(pageindex, pagesize) {
+            var bid = $("#BusinessId").val();
+            var row = '';
+            var reccount = 0;
+            var game = '';
+            var gtype = '';
+            gl.ajaxreqloader(websiteurlapi + "/GetGuestCheckInByBusiness", "POST", { BusinessId: bid, Pi: pageindex, Ps: pagesize, age: age, str: str, gender: gender, gtid: gtid }, function (response) {
+                if (response.length > 0) {
+                    $('#tbldata').removeClass('hide');
+                    $('#norec').addClass('hide');
+                    reccount = response[0].TotalRecords;
+                    $.each(response, function (i, item) {
+                        //gl.ajaxreq(websiteurlapi + "GetCustomerFirstGame", "GET", { cid: item.CustomerId,bid:bid }, function (result) {
+                        //    game = result.GameName;
+                        //    gtype = result.Game;
+                        //}, '', '', '', '', false, false);
+                        //if (item.ZipCode == null) {
+                        //    item.ZipCode = 'N/A'
+                        //}
+                        row += "<tr><td class='col-lg-2'>" + item.GameTitle + '</br>GameType:' + item.GameTypestring + "</td><td class='col-lg-2'>" + item.FirstName + ' ' + item.LastName + "</td><td class='col-lg-4'>" + item.Mobile + "</td><td class='col-lg-2'>" + item.Email + "</td><td class='col-lg-2'>" + item.Agestring + "</td><td class='col-lg-2'>" + item.Genderstring + "</td><td class='col-lg-2'>" + item.ZipCode + "</td></tr>";
+                    });
+                    $("#tbldata").html(row);
+                    setPaging(reccount, pageindex, pagesize);
+                }
+                else {
+                    $('#norec').removeClass('hide');
+                    $('#tblgrid').addClass('hide');
+                }
+
+            }, '', '', '', '', false, false);
+        }
+
+        $(document).on("click", ".d-paging", function (event) {
+            var pagesize = $('#ddlpagesize').val();
+            var pageindex = $(this).attr('_id');
+            window.history.pushState(null, "", GetUrlWithNoQueryStrings() + "?_f=" + $("#from").val() + "&_t=" + $("#to").val() + "&_pi=" + pageindex + "&_ps=" + pagesize + "&_str=" + $("#search").val() + "&_age=" + $("#Agegroup").val() + "&_g=" + $("#gender").val() + "&_gt=" + $("#gtid").val());
+            SetViewNotificationGrid(pageindex, pagesize);
+        });
+        $(document).on("change", '#ddlpagesize', function (event) {
+            var pagesize = $('#ddlpagesize').val();
+            var pageindex = 1;
+            window.history.pushState(null, "", GetUrlWithNoQueryStrings() + "?_f=" + $("#from").val() + "&_t=" + $("#to").val() + "&_pi=" + pageindex + "&_ps=" + pagesize + "&_str=" + $("#search").val() + "&_age=" + $("#Agegroup").val() + "&_g=" + $("#gender").val() + "&_gt=" + $("#gtid").val());
+            SetViewNotificationGrid(pageindex, pagesize);
+        });
+    }
+
+
+    function Exportdata() {
+
+        var str = SetQueryStDefaultVal("_str", "");
+        $("#search").val(str);
+
+        var age = SetQueryStDefaultVal("_age", 0);
+        age = age == -1 ? 0 : age;
+
+        var gender = SetQueryStDefaultVal("_g", 0);
+        gender = gender == -1 ? 0 : gender;
+
+        var gtid = SetQueryStDefaultVal("_gt", 0);
+        gtid = gtid == -1 ? 0 : gtid;
+
+        var pi = SetQueryStDefaultVal("_pi", 1);
+        var ps = SetQueryStDefaultVal("_ps", 25);
+        $("#ddlpagesize").val(ps);
+
+        SetExportCustomerGrid(pi, ps);
+
+        function SetExportCustomerGrid(pageindex, pagesize) {
+            var bid = $("#BusinessId").val();
+            var row = '';
+            var reccount = 0;
+            var game = '';
+            var gtype = '';
+            gl.ajaxreqloader(websiteurlapi + "/GetGuestCheckInByBusiness", "POST", { BusinessId: bid, Pi: pageindex, Ps: -1, age: age, str: str, gender: gender }, function (response) {
+                if (response.length > 0) {
+                    reccount = response[0].TotalRecords;
+                    $.each(response, function (i, item) {
+                        //gl.ajaxreq(websiteurlapi + "GetCustomerFirstGame", "GET", { cid: item.CustomerId }, function (result) {
+                        //    game = result.GameName;
+                        //    gtype = result.Game;
+                        //}, '', '', '', '', false, false);
+                        //if (item.ZipCode == null) {
+                        //    item.ZipCode = 'N/A'
+                        //}
+                        row += "<tr><td>" + item.GameTitle + '</td><td>' + item.GameTypestring + "</td><td>" + item.FirstName + ' ' + item.LastName + "</td><td>" + item.Mobile + "</td><td>" + item.Email + "</td><td>" + item.Agestring + "</td><td>" + item.ZipCode + "</td><td>" + item.Genderstring + "</td></tr>";
+                    });
+                    $("#tbldatapdf").html(row);
+                }
+
+            }, '', '', '', '', false, false);
+        }
+    }
+</script>
+
+    <script type="text/javascript">
+        function generate() {
+            Exportdata();
+            var doc = new jsPDF('p', 'pt', 'letter');
+            var htmlstring = '';
+            var tempVarToCheckPageHeight = 0;
+            var pageHeight = 0;
+            pageHeight = doc.internal.pageSize.height;
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector
+                '#bypassme': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"
+                    return true
+                }
+            };
+            margins = {
+                top: 150,
+                bottom: 60,
+                left: 40,
+                right: 40,
+                width: 700
+            };
+            var y = 20;
+            doc.setLineWidth(2);
+            doc.text(200, y = y + 30, "TOTAL CONTESTANTS");
+            doc.autoTable({
+                html: '#simple_table',
+                startY: 70,
+                theme: 'grid',
+                columnStyles: {
+                    0: {
+                        cellWidth: 70,
+                    },
+                    1: {
+                        cellWidth: 70,
+                    },
+                    2: {
+                        cellWidth: 70,
+                    },
+                    3: {
+                        cellWidth: 70,
+                    },
+                    4: {
+                        cellWidth: 70,
+                    },
+                    5: {
+                        cellWidth: 70,
+                    },
+                    6: {
+                        cellWidth: 70,
+                    },
+                    7: {
+                        cellWidth: 70,
+                    }
+
+                },
+                styles: {
+                    minCellHeight: 30
+                }
+            })
+            doc.save('Contestants.pdf');
+        }
+
+        function exceller() {
+            Exportdata();
+            var uri = 'data:application/vnd.ms-excel;base64,',
+              template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+              base64 = function (s) {
+                  return window.btoa(unescape(encodeURIComponent(s)))
+              },
+              format = function (s, c) {
+                  return s.replace(/{(\w+)}/g, function (m, p) {
+                      return c[p];
+                  })
+              }
+            var toExcel = document.getElementById("simple_table").innerHTML;
+            var ctx = {
+                worksheet: name || '',
+                table: toExcel
+            };
+            var link = document.createElement("a");
+            link.download = "Contestants.xls";
+            link.href = uri + base64(format(template, ctx))
+            link.click();
+        }
+
+        function exportCsv() {
+            Exportdata();
+            $('#simple_table').tableToCsv({
+                filename: 'Contestants.csv',
+                colspanMode: 'replicate'
+            });
+        }
+
+    </script>
+
+
+

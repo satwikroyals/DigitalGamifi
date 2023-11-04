@@ -1,0 +1,191 @@
+﻿@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code; 
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+        <div class="carousel-inner" role="listbox">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active" style="background-image: url(@Url.Content(Globalsettings.publicimagespath("slide/slide-1.jpg")));">
+                <div class="carousel-container">
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item" style="background-image: url(@Url.Content(Globalsettings.publicimagespath("slide/slide-2.jpg")));">
+                <div class="carousel-container">
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item" style="background-image: url(@Url.Content(Globalsettings.publicimagespath("slide/slide-3.jpg")));">
+                <div class="carousel-container">
+                </div>
+            </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon icofont-simple-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon icofont-simple-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= About Us Section ======= -->
+    <!-- End About Us Section -->
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Welcome to Game Snatcherz</h2>
+            </div>
+
+
+            <p class="global-wrapper">
+                The Game Snatcherz app allows users to play  free, branded, promotional mobile games from local businesses.
+                Play fun engaging mobile games from your favorite local businesses and receive notifications on promotional offers.
+                All games are free to play and no purchases are required to receive promotional offers.
+                Access the power of Gamification to interact with local businesses on another level. PLAY, INTERACT, ENJOY, & REPEAT!!!....GAME ON!!!
+            </p>
+
+            <p class="global-wrapper">
+                The Game Snatcherz app allows users to play  free, branded, promotional mobile games from local businesses.
+                Play fun engaging mobile games from your favorite local businesses and receive notifications on promotional offers.
+                All games are free to play and no purchases are required to receive promotional offers.
+                Access the power of Gamification to interact with local businesses on another level. PLAY, INTERACT, ENJOY, & REPEAT!!!....GAME ON!!!
+            </p>
+        </div>
+    </section><!-- End Services Section -->
+    <!-- ======= Portfolio Section ======= -->
+    <!-- End Portfolio Section -->
+    <!-- ======= Our Clients Section ======= -->
+    <!-- End Our Clients Section -->
+    <!-- ======= Portfolio Section ======= -->
+    <!-- End Portfolio Section -->
+    <section id="registration" class="contact">
+        <div class="container">
+            <div class="row mt-5 justify-content-center" data-aos="fade-up">
+                <div class="col-lg-10">
+                    <div class="section-title">
+                        <h2>Registration</strong></h2>
+                    </div>
+                    <div class="panel-body form-horizontal">
+                        <div class="alert alert-danger vsdiv-full bo-l-0 bo-r-0 bo-rad-0 clearfix @(Html.ViewData.ModelState.IsValid?"hide":"show")" id="error" tabindex='1'>
+                            <span>Errors List</span>
+                            @Html.ValidationSummary()
+                        </div>
+                        @*<form action="/Home/Add" enctype="multipart/form-data" method="post">*@
+                          @*@using (Html.BeginForm("Add", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+                               @*{*@
+                            @*@Html.AntiForgeryToken();
+                            @Html.ValidationSummary(false, "", new { @class = "alert alert-danger err" })*@
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">First Name <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <input class="width-70 width-110 myfilds mytxtfilds" data-val="true" data-val-required="Please enter FirstName." id="FirstName" maxlength="50" name="FirstName" placeholder="First Name" type="text" value="" />
+
+                                </div>
+                            </div>
+                            <div class="form-group cvb">
+                                <label class="col-sm-2 control-label">Last Name <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <input class="width-70 width-110 myfilds mytxtfilds" data-val="true" data-val-required="Please enter LastName." id="LastName" maxlength="50" name="LastName" placeholder="Last Name" type="text" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Email <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <input class="width-70 width-110 myfilds mytxtfilds" data-val="true" data-val-email="Please enter Valid EmailId." data-val-required="Please enter Email." id="Email" maxlength="100" name="Email" placeholder="Email Id" type="text" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Mobile <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <input class="width-70 width-110 myfilds mytxtfilds" data-val="true" data-val-required="Please enter Mobile." id="Mobile" maxlength="15" name="Mobile" placeholder="Mobile Number" type="text" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Business Name <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <input class="width-70 width-110 myfilds mytxtfilds" data-val="true" data-val-required="Please enter Business Name." id="BusinessName" maxlength="150" name="BusinessName" placeholder="Business Name" type="text" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Business Type </label>
+                                <div class="col-sm-5 controls">
+                                    @*<input class="hide txtbusinesstypeid" data-val="true" data-val-number="The field BusinessTypeId must be a number." data-val-required="The BusinessTypeId field is required." id="BusinessTypeId" name="BusinessTypeId" type="text" value="0" />*@
+                                    <select id="BusinessTypeId" class="width-70 width-110 myfilds mytxtfilds ddlbusinesstypeid">
+                                        <option value="0">-- Select --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Business Logo </label>
+                                <div class="col-sm-5 controls">
+                                    <img id="imgpreview" src="" class="previewimg" /><br /><br />
+                                    <input class="hide" id="Logo" name="Logo" type="text" value="" />
+                                    <input class="width-70 width-110 myfilds mytxtfilds" id="LogoFile" name="LogoFile" onchange="readURL(this);" placeholder="Upload Logo" type="file" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">ZipCode <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <input class="width-70 width-110 myfilds mytxtfilds" data-val="true" data-val-required="Please enter zipcode." id="ZipCode" maxlength="50" name="ZipCode" placeholder="ZipCode" type="text" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Address <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <textarea class="width-70 width-110 myfilds mytxtfilds" cols="20" data-val="true" data-val-required="Please enter Address." id="Address" maxlength="250" name="Address" placeholder="Address" rows="2"></textarea>
+
+                                    <input type="hidden" name="Latitude" id="Latitude" value="0" />
+                                    <input type="hidden" name="Longitude" id="Longitude" value="0" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">UserName <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <input class="width-70 width-110 myfilds mytxtfilds" data-val="true" data-val-required="Please enter Username." id="UserName" maxlength="20" name="UserName" placeholder="Username" type="text" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Password <span class="vd_red">*</span></label>
+                                <div class="col-sm-5 controls">
+                                    <input class="width-70 width-110 myfilds mytxtfilds" data-val="true" data-val-required="Please enter Password." id="Password" maxlength="20" name="Password" placeholder="Password" type="text" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group form-actions">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-9">
+                                    <button class="btn vd_btn vd_bg-green vd_white" type="button" onclick="return Addbusiness()"><i class="icon-ok"></i>Save</button>
+                                    @*<a class="btn btn-danger" href="/Admin/Restaurants/View">Cancel</a>*@
+                                </div>
+                            </div>
+                          @*}*@
+                        @*</form>*@
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- ======= Our Clients Section ======= -->
+    <!-- End Our Clients Section -->
+
+</main><!-- End #main -->

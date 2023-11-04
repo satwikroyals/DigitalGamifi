@@ -1,0 +1,548 @@
+﻿@{
+    Layout = null;
+}
+
+@using DIGITAL_GAMIFY.Code
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="~/customercontent/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/customercontent/css/styles.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        var websiteurl = '@Globalsettings.GetWebSiteUrl()';
+        var websiteurlapi = '@Globalsettings.GetWebSiteUrlApi()';
+    </script>
+
+</head>
+<body>
+    <div class="main-row">
+        <input type="hidden" id="agefield" value="@ViewBag.Age" />
+        <input type="hidden" id="condition" value="@ViewBag.cond" />
+        <input type="hidden" id="bid" value="@ViewBag.bid" />
+        <div class="" id="disp1" style="display:none">
+            <div class="">
+                <div class="frame-border">
+                    <nav class="navbar navbar-light b-color">
+                        <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="fa fa-align-justify"></span>
+                        </button>
+
+                        <button class="invisible px-3"></button>
+
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                <li class="nav-item active">
+                                    <a class="nav-link text-light" href="#">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#">Link</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="container-fluid p-0 content-h boxscroll do-nicescrol4 signin-bg py-5">
+                        <div class="container py-5">
+                            <div class="row">
+                                <div class="col-md-12 mx-auto">
+                                    <div id="second" style="display:none">
+                                        <div class="myform form ">
+                                            <div class="logo mb-3">
+                                                <div class="col-md-12 text-center">
+                                                    <h6 class="text-dark">Enter the Code which we sent to your mail.</h6>
+                                                </div>
+                                            </div>
+                                            <form action="" method="post" name="login">
+                                                <div class="form-group">
+                                                    <input type="text" name="code" class="form-control" id="code" placeholder="Verification Code">
+                                                </div>
+                                                <div class="col-md-12 text-center ">
+                                                    <button type="button" class=" btn btn-block mybtn text-white g-btn tx-tfm" onclick="return Register()">Proceed</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div id="first">
+                                        <div class="myform form ">
+                                            <div class="logo mb-3">
+                                                <div class="col-md-12 text-center">
+                                                    <h3 class="text-dark">Sign up</h3>
+                                                </div>
+                                            </div>
+                                            <form action="#" name="registration">
+                                                <input type="hidden" id="customerid" value="" />
+                                                <input type="hidden" id="url" value="@ViewBag.url" />
+                                                <input type="hidden" id="VerifyCode" value="">
+                                                <div class="form-group">
+                                                    <input type="text" name="FirstName" class="form-control" id="FirstName" aria-describedby="emailHelp" placeholder="Enter First Name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="LastName" class="form-control" id="LastName" aria-describedby="emailHelp" placeholder="Enter Last Name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="Mobile" class="form-control" id="Mobile" aria-describedby="emailHelp" placeholder="Enter Mobile" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" name="Email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="ZipCode" class="form-control" id="ZipCode" aria-describedby="emailHelp" placeholder="ZIP Code">
+                                                </div>
+                                                <div class="form-group">
+                                                    <select id="Gender" class="form-control">
+                                                        <option value="0">Select Gender</option>
+                                                        <option value="1">Male</option>
+                                                        <option value="2">Female</option>
+                                                        <option value="3">Other</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select id="Age" class="form-control">
+                                                        <option value="0">Select Age group</option>
+                                                        <option value="1">10-21</option>
+                                                        <option value="2">22-40</option>
+                                                        <option value="3">41-65</option>
+                                                        <option value="4">65+</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-12 text-center">
+                                                    <button type="button" class=" btn btn-block mybtn text-white g-btn tx-tfm" onclick="return Register()">Signup</button>
+                                                </div>
+                                                @*<div class="col-md-12 ">
+                                                        <div class="form-group">
+                                                            <p class="text-center"><a href="#" id="signin">Already have an account?</a></p>
+                                                        </div>
+                                                    </div>*@
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="circle-button"></div>
+        </div>
+
+
+        <div class="" id="disp2" style="display:block">
+            <div class="">
+                <div class="frame-border">
+
+
+
+                    <div class="container-fluid p-0 content-h12 boxscroll do-nicescrol4  snatcherz-bg py-5">
+                        <div class="wrap">
+
+                            <div class=" mvn">
+
+                                <div class="finger-lightly-wrapper">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="welcome-image-wrapper inside-right">
+                                            <div class="mt-3 mb-5"><img src="@ViewBag.logo" class="img-fluid vb-90"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="welcome-header inside-left">
+                                            <h6 class="panel-wrapper1">@ViewBag.bname</h6>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="game-welcome">
+                                    
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img class="d-block w-100" src="@ViewBag.Gimage" style="height: 200px;">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                </div>
+                                <div class="game-wrap">
+                                    <h6 class="px-3 py-3">
+                                        @ViewBag.desc
+                                        @*Here at Game Snatcherz we use the power of gamification to help local businesses
+                                            increase brand loyalty and engage customers on another level!*@
+                                    </h6>
+                                    <div id="cond1" style="display:none">
+                                        <h6>Conditions:</h6>
+                                        <h6 class="px-3 py-3">
+                                           @ViewBag.agecondition
+                                        </h6>
+                                    </div>
+                                    <!-- <div class="my-2"><img src="images/swipe.gif" class="img-fluid w-50"></div> -->
+                                    <div class="">
+                                        @*<a onclick="Proceed()" id="btn1" class="btn px-5 rounded-0"> <img src="~/customercontent/images/redeem.png" class="img-fluid w-50"></a>*@
+
+                                        <a onclick="AgeVerify()" id="btn2" class="btn px-5 rounded-0"> <img src="~/customercontent/images/redeem.png" class="img-fluid w-50"></a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="circle-button"></div>
+            </div>
+        </div>
+
+
+        <div class="" id="disp3" style="display:none">
+            <div class="">
+                <div class="frame-border">
+
+
+
+                    <div class="container-fluid p-0 content-h12 boxscroll do-nicescrol4  snatcherz-bg py-5">
+                        <div class="wrap">
+
+                            <div class=" mvn">
+
+                                <div class="finger-lightly-wrapper">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="welcome-image-wrapper inside-right">
+                                            <div class="mt-3 mb-5"><img src="@ViewBag.logo" class="img-fluid vb-90"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="welcome-header inside-left">
+                                            <h6 class="panel-wrapper1">@ViewBag.bname</h6>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="game-welcome">
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <!-- <img class="d-block w-100" src="images/4.jpg" alt="First slide"> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="game-registration-form" id="DOBField" style="display:none">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input type="text" name="date" class="form-control date" id="DOB" placeholder="Date of birth">
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<input type="text" id="txtDate" name="SelectedDate" readonly="readonly" />*@
+                                <br />
+                                <span id="lblError" style="color:Red"></span>
+                                <div class="game-registration-form1">
+                                    <div class="form-group">
+                                        <input id="myinput1" type="checkbox" onchange="notrobot()" />
+                                        <label for="myinput1" class="indented-checkbox-text"> I'm not a Robot</label>
+                                    </div>
+                                </div>
+
+                                <div class="game-registration-form1">
+                                    <div class="form-group">
+                                        <input id="myinput2" type="checkbox" onchange="terms()" />
+                                        <label for="myinput2" class="indented-checkbox-text">Game Rules</label>
+                                    </div>
+                                </div>
+
+                                <div class="game-wrap">
+                                    
+                                    <!-- <div class="my-2"><img src="images/swipe.gif" class="img-fluid w-50"></div> -->
+                                    <div class="">
+                                        <a class="btn px-5 rounded-0" id="hidebtn"> <img src="~/customercontent/images/play1.png" class="img-fluid w-50"></a>
+                                        <a onclick="RegisterPage()" id="showbtn" class="btn px-5 rounded-0" style="display:none"> <img src="~/customercontent/images/redeem.png" class="img-fluid w-50"></a>
+                                    </div>
+                                    <h6 class="px-3 py-3">
+                                        <p><a href="http://www.gamesnatcherz.com/about/terms" target="_blank">Terms and conditions.</a></p>
+                                    </h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="circle-button"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="myModalbook" role="dialog" >
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="w3ls-title book">Game Rules</h3>
+                    <div class="boxpopup-form">
+                        <div>
+                            <h6 class="px-3 py-3">
+                                @ViewBag.cond
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class="boxpopup-buuton button-clear">
+                        <input type="submit" class="close" onclick="return Accept()" data-dismiss="modal" value="Accept">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="~/customercontent/js/jquery-3.5.1.slim.min.js"></script>
+        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+        <script type="text/javascript" src="~/customercontent/js/jquery-2.1.4.min.js"></script>
+        <script src="~/customercontent/js/bootstrap.min.js"></script>
+        <script src="~/customercontent/js/popper.min.js"></script>
+        <script src="~/customercontent/js/global.js"></script>
+        @*<script src="@Url.Content(Globalsettings.adminjspath("bootstrap-datepicker.min.js"))"></script>*@
+        @*<link href="@Url.Content(Globalsettings.admincsspath("bs-datetime.css"))" rel="stylesheet" />*@
+        <script>
+            $(document).ready(function () {
+                if ($("#agefield").val() == 1) {
+                    //$("#btn1").css("display", "none");
+                    ///$("#btn2").css("display", "block");
+                    $("#cond1").css("display", "block");
+                    $("#DOBField").css("display", "block");
+                }
+            });
+            function Accept() { $('#showbtn').css("display", "block"); $('#hidebtn').css("display", "none"); }
+            function terms() {
+                if ($("#myinput2").is(":checked")) {
+                    //$('#myModalbook').modal('show');
+                    alert($("#condition").val());
+                    if ($("#myinput1").is(":checked")) {
+                        $('#showbtn').css("display", "block");
+                        $('#hidebtn').css("display", "none");
+                    }
+                }
+                else {
+                    $('#showbtn').css("display", "none");
+                    $('#hidebtn').css("display", "block");
+                }
+            }
+            function date() {
+                $("#DOB").datepicker(
+                  {
+                      minDate: new Date(1900, 1 - 1, 1), maxDate: '-18Y',
+                      dateFormat: 'dd/mm/yy',
+                      changeMonth: true,
+                      changeYear: true,
+                      yearRange: '-110:-18'
+                  }
+                );
+            };
+            function notrobot() {
+                if ($("#myinput1").is(":checked")) {
+                    if ($("#myinput2").is(":checked")) {
+                        $('#showbtn').css("display", "block");
+                        $('#hidebtn').css("display", "none");
+                    }
+                }
+                else {
+                    $('#showbtn').css("display", "none");
+                    $('#hidebtn').css("display", "block");
+                }
+            }
+
+        </script>
+
+        <script type="text/javascript">
+            function Proceed() {
+                $("#disp1").css("display", "block");
+                $("#disp2").css("display", "none");
+            }
+            function AgeVerify() {
+                $("#disp3").css("display", "block");
+                $("#disp2").css("display", "none");
+            }
+            function RegisterPage() {
+                if ($('#DOB').val() == "" && $("#agefield").val() == 1) {
+                    alert("Enter Date of birth")
+                } else {
+                    $("#disp1").css("display", "block");
+                    $("#disp3").css("display", "none");
+                }
+            }
+            $("#signup").click(function () {
+                $("#first").fadeOut("fast", function () {
+                    $("#second").fadeIn("fast");
+                });
+            });
+
+            $("#signin").click(function () {
+                $("#second").fadeOut("fast", function () {
+                    $("#first").fadeIn("fast");
+                });
+            });
+            function Register() {
+                var gamefinishUrl = $('#url').val();
+                if ($('#FirstName').val() == "") {
+                    alert("Enter FirstName");
+                    return;
+                }
+                if ($('#LastName').val() == "") {
+                    alert("Enter LastName");
+                    return;
+                }
+                if ($('#Mobile').val() == "") {
+                    alert("Enter Mobile");
+                    return;
+                }
+                if ($('#Email').val() == "") {
+                    alert("Enter Email");
+                    return;
+                }
+                if ($('#Email').val().match(/^\w+([\.-]?\w+)*\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                    alert("Entered Invalid Email");
+                    return;
+                }
+
+                    //var res = validate();
+                    //if ($('#code').val() == "") {
+                    //    alert("Please Enter Code.")
+                    //}
+                    //if ($('#code').val() != $('#VerifyCode').val()) {
+                    //    alert("Incorrect Code.")
+                    //}
+                else {
+                    var empObj = {
+                        FirstName: $('#FirstName').val(),
+                        LastName: $('#LastName').val(),
+                        Mobile: $('#Mobile').val(),
+                        Email: $('#Email').val(),
+                        Pin: $("#Pin").val(),
+                        Age: $("#Age").val(),
+                        Gender: $("#Gender").val(),
+                        DOB: $("#DOB").val(),
+                        ZipCode: $("#ZipCode").val(),
+                        BusinessId: $('#bid').val(),
+                        Guest: 1,
+                    };
+                    $.ajax({
+                        url: websiteurlapi + "RegisterGuest",
+                        data: JSON.stringify(empObj),
+                        type: "POST",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            $("input:text").val("");
+                            $("#Pin").val("");
+                            if (result.Id > 0) {
+                                //console.log(result);
+                                if (result.Id < 0) {
+                                    alert(result.Message);
+                                }
+                                //$("#customerid").val(data.Id);
+                            }
+                            //RedeemPrize();
+                            //window.location.href = gamefinishUrl;
+                            window.location.href = gamefinishUrl + '&cid=' + result.Id + '&_m=' + $('#Email').val();
+                            $("#Email").val("");
+                        },
+                        error: function (errormessage) {
+                            alert(errormessage.responseText);
+                        }
+                    });
+                }
+            }
+            function EmailVerification() {
+                if ($('#FirstName').val() == "") {
+                    alert("Enter FirstName")
+                }
+                if ($('#LastName').val() == "") {
+                    alert("Enter LastName")
+                }
+                if ($('#Mobile').val() == "") {
+                    alert("Enter Mobile")
+                }
+                if ($('#Email').val() == "") {
+                    alert("Enter Email")
+                }
+                else {
+                    $("#first").css("display", "none");
+                    $("#second").css("display", "block");
+                    //$("#second").fadeOut("fast", function () {
+                    //    $("#first").fadeIn("fast");
+                    //});
+                    var email = $("#Email").val();
+                    gl.ajaxreq(websiteurlapi + 'EmailVerification', 'get', { Email: email }, function (response) {
+                        if (response.StatusMessage != "") {
+                            $("#VerifyCode").val(response.StatusMessage);
+                        }
+                    }, '', '', '', '', false, false);
+                }
+            }
+
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+                type="text/javascript"></script>
+        <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+              rel="Stylesheet" type="text/css" />
+        <script type="text/javascript">
+            $(function () {
+                $("#DOB").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    //showOn: 'button',
+                    buttonImageOnly: true,
+                    buttonImage: websiteurl + 'content/images/calendar.gif',
+                    dateFormat: 'dd/M/yy',
+                    yearRange: '-100y',
+                    maxDate: '-15y',
+                    vertical: 'bottom'
+                    
+                    //onSelect: function (dateString, txtDate) {
+                    //   // ValidateDOB(dateString);
+                    //}
+                });
+            });
+            function ValidateDOB(dateString) {
+                var lblError = $("#lblError");
+                var parts = dateString.split("/");
+                var dtDOB = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+                var dtCurrent = new Date();
+                lblError.html("Eligibility 18 years ONLY.")
+                if (dtCurrent.getFullYear() - dtDOB.getFullYear() < 18) {
+                    return false;
+                }
+
+                if (dtCurrent.getFullYear() - dtDOB.getFullYear() == 18) {
+
+                    //CD: 11/06/2018 and DB: 15/07/2000. Will turned 18 on 15/07/2018.
+                    if (dtCurrent.getMonth() < dtDOB.getMonth()) {
+                        return false;
+                    }
+                    if (dtCurrent.getMonth() == dtDOB.getMonth()) {
+                        //CD: 11/06/2018 and DB: 15/06/2000. Will turned 18 on 15/06/2018.
+                        if (dtCurrent.getDate() < dtDOB.getDate()) {
+                            return false;
+                        }
+                    }
+                }
+                lblError.html("");
+                return true;
+            }
+        </script>
+</body>
+</html>

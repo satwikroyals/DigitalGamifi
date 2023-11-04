@@ -1,0 +1,848 @@
+﻿@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code;
+@model DIGITAL_GAMIFY.Entities.QuizQuestionAndAnswer
+@{
+    ViewBag.Title = "AddQuiz";
+    Layout = "~/Areas/Business/Views/Shared/_LayoutBusiness.cshtml";
+}
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header mylinks">
+                    <ul class="breadcrumb">
+                        <li>Quiz </li>
+                        <li class="active">Add/Edit</li>
+                    </ul>
+                    <div class="vd_panel-menu hidden-sm hidden-xs resize-content" data-intro="" data-step="5" data-position="left">
+                        <div data-action="remove-navbar" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-navbar-button menu"><i class="fa fa-arrows-h"></i></div>
+                        <div data-action="remove-header" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-header-button menu"><i class="fa fa-arrows-v"></i></div>
+                        <div data-action="fullscreen" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="fullscreen-button menu"><i class="glyphicon glyphicon-fullscreen"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd_content-section clearfix subdiv">
+                <div class="col-lg-12 ">
+                    <div class="row" id="advanced-input">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="row" id="auto-complete-input">
+                        <div class="col-md-12">
+                            <div class="panel widget">
+                                <div class="panel-heading vd_bg-grey">
+                                    <h3 class="panel-title"><span class="menu-icon"><i class="fa fa-gamepad"></i></span>Add/Edit Quiz </h3>
+                                </div>
+                                <div class="panel-body form-horizontal">
+                                    @using (Html.BeginForm("AddQuiz", "Quiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        <div class="alert alert-danger vsdiv-full bo-l-0 bo-r-0 bo-rad-0 clearfix @(Html.ViewData.ModelState.IsValid?"hide":"show")" id="error" tabindex='1'>
+                                            <span>Errors List</span>
+                                            @Html.ValidationSummary()
+                                        </div>
+                                        @*@Html.AntiForgeryToken();*@
+                                        @*@Html.ValidationSummary(false, "", new { @class = "alert alert-danger err" })*@
+                                        <input type="hidden" id="TotalPlayed" name="TotalPlayed" value="@Model.QuizDetails.TotalPlayed" />
+                                        <input type="hidden" id="QuizId" name="QuizId" value="@Request.QueryString["id"]" />
+                                        <div class="my-2">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Title : <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds isvalidate" errormsg="Enter Title" name="QuizName" id="QuizName" value="" placeholder="Title" />
+                                                </div>
+                                            </div>
+                                            @*<div class="form-group">
+                                                    <label class="col-sm-2 control-label">QuizCode : <span class="vd_red">*</span></label>
+                                                    <div class="col-sm-5 controls">
+                                                        <input type="text" class="width-70 width-110 myfilds mytxtfilds" name="QuizCode" id="QuizCode" value="" placeholder="QuizCode" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">SmsCode : <span class="vd_red">*</span></label>
+                                                    <div class="col-sm-5 controls">
+                                                        <input type="text" class="width-70 width-110 myfilds mytxtfilds" name="SmsCode" id="SmsCode" value="" placeholder="SmsCode" />
+                                                    </div>
+                                                </div>*@
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Start Date <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds date isvalidate" errormsg="Enter StartDate" name="StartDate" value="" id="StartDate" placeholder="Date" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">End Date <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds date isvalidate" errormsg="Enter EndDate" id="EndDate" name="EndDate" value="" placeholder="Date" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Game Info : <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <textarea class="width-70 width-110 myfilds mytxtfilds isvalidate" errormsg="Enter Gameinfo" name="ShortDescription" id="ShortDescription" placeholder="Game Info"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Game Rules : <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <textarea class="width-70 width-110 myfilds mytxtfilds isvalidate" rows="3" errormsg="Enter Conditions" name="Conditions" id="Conditions" placeholder="Game Conditions"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Age Required?<span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="checkbox" value="1" name="IsAgeRequire" id="IsAgeRequire" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Age Condition <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <select class="width-70 width-110 myfilds mytxtfilds" id="AgeCondition" name="AgeCondition" bindval="">
+                                                        <option value="1">You must be 18 years and above to enter into the contest.</option>
+                                                        <option value="2">You must be 21 years and above to enter into the contest.</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Game Image : <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <img id="imgpreview" src="" class="previewimg" /><br /><br />
+                                                    @*@Html.TextBoxFor(m => m.Image, new { @class = "hide" })*@
+                                                    <input type="hidden" name="QuizImage" id="QuizImage" value="" />
+                                                    <input type="file" class="width-70 width-110 myfilds mytxtfilds @(Model.QuizDetails.QuizId==0?"isvalidate":"")" errormsg="Upload Image" placeholder="Upload First Prize Image" name="QuizImagefile" id="QuizImagefile" onchange="readURL(this, 'imgpreview');" />
+                                                    @*@Html.TextBox("ImageFile", null, htmlAttributes: new { name = "ImageFile", @class = "width-70 width-110 myfilds mytxtfilds", type = "file", placeholder = "Upload SwipeanWin Image", id = "ImageFile", onchange = "readURL(this,'imgpreview');" })*@
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">FirstPrize : <span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <img id="FirstPrize" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" class="width-70 width-110 myfilds mytxtfilds gamed" name="FirstPrizeImagefile" placeholder="Upload First Prize Image" onchange="readURL(this, 'FirstPrize');" />
+                                                    <input type="hidden" name="FirstPrizeImage" id="FirstPrizeImage" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">First Prize Count : <span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds game" name="FirstPrizeCount" id="FirstPrizeCount" placeholder="Count" value="" />
+                                                    <label class="control-label">Prizes Left: <span class="vd_red" id="FirstPrizesLeft"></span></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">FirstPrize Text : <span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" name="FirstPrizeText" id="FirstPrizeText" placeholder="" value="" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="checkbox" value="1" name="PhysicalPrize1" id="PhysicalPrize1" onchange="Attr1()" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="attri1" style="display:none">
+                                                <h5 class="m-0 main-txt varians-wrap">Variants (Please enter multiple values with comma separated)</h5>
+                                                <div id="attributes">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">SecondPrize : <span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <img id="SecondPrize" src="" class="previewimg" /><br /><br />
+                                                    <input type="hidden" name="SecondPrizeImage" id="SecondPrizeImage" />
+                                                    <input type="file" class="width-70 width-110 myfilds mytxtfilds gamed" name="SecondPrizeImagefile" placeholder="Upload First Prize Image" onchange="readURL(this, 'SecondPrize');" />
+                                                    @*@Html.TextBox("ImageFile", null, htmlAttributes: new { name = "ImageFile", @class = "width-70 width-110 myfilds mytxtfilds", type = "file", placeholder = "Upload SwipeanWin Image", id = "ImageFile", onchange = "readURL(this,'imgpreview');" })*@
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Second Prize Count : <span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds game" name="SecondPrizeCount" id="SecondPrizeCount" placeholder="Count" value="" />
+                                                    <label class="control-label">Prizes Left: <span class="vd_red" id="SecondPrizesLeft"></span></label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">SecondPrize Text : <span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" name="SecondPrizeText" id="SecondPrizeText" placeholder="" value="" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="checkbox" value="1" name="PhysicalPrize2" id="PhysicalPrize2" onchange="Attr2()" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="attri2" style="display:none">
+                                                <h5 class="m-0 main-txt varians-wrap">Variants (Please enter multiple values with comma separated)</h5>
+                                                <div id="attributes2">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Once In <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <select class="width-70 width-110 myfilds mytxtfilds gamed" id="OnceIn" name="OnceIn" bindval="">
+                                                        <option value="3">3</option>
+                                                        <option value="5">5</option>
+                                                        <option value="10">10</option>
+                                                        <option value="15">15</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                        <option value="200">200</option>
+                                                        <option value="500">500</option>
+                                                        <option value="1000">1000</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="pb-5 border-bottom"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 1</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_1" id="QuizQuestionId_1" value="0" />
+                                                <textarea class="form-control main-input" id="Question_1" name="Question_1" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_1_1" name="QuizAnswerId_1_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_1_1" id="Answer_1_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_1_2" name="QuizAnswerId_1_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_1_2" id="Answer_1_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_1_3" name="QuizAnswerId_1_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_1_3" id="Answer_1_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_1_4" name="QuizAnswerId_1_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_1_4" id="Answer_1_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_1" id="CorrectAnswerId_1">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 2</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_2" id="QuizQuestionId_2" value="0" />
+                                                <textarea class="form-control main-input" id="Question_2" name="Question_2" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_2_1" name="QuizAnswerId_2_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_2_1" id="Answer_2_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_2_2" name="QuizAnswerId_2_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_2_2" id="Answer_2_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_2_3" name="QuizAnswerId_2_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_2_3" id="Answer_2_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_2_4" name="QuizAnswerId_2_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_2_4" id="Answer_2_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_2" id="CorrectAnswerId_2">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 3</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_3" id="QuizQuestionId_3" value="0" />
+                                                <textarea class="form-control main-input" id="Question_3" name="Question_3" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_3_1" name="QuizAnswerId_3_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_3_1" id="Answer_3_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_3_2" name="QuizAnswerId_3_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_3_2" id="Answer_3_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_3_3" name="QuizAnswerId_3_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_3_3" id="Answer_3_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_3_4" name="QuizAnswerId_3_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_3_4" id="Answer_3_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_3" id="CorrectAnswerId_3">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 4</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_4" id="QuizQuestionId_4" value="0" />
+                                                <textarea class="form-control main-input" id="Question_4" name="Question_4" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_4_1" name="QuizAnswerId_4_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_4_1" id="Answer_4_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_4_2" name="QuizAnswerId_4_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_4_2" id="Answer_4_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_4_3" name="QuizAnswerId_4_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_4_3" id="Answer_4_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_4_4" name="QuizAnswerId_4_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_4_4" id="Answer_4_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_4" id="CorrectAnswerId_4">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 5</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_5" id="QuizQuestionId_5" value="0" />
+                                                <textarea class="form-control main-input" id="Question_5" name="Question_5" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_5_1" name="QuizAnswerId_5_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_5_1" id="Answer_5_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_5_2" name="QuizAnswerId_5_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_5_2" id="Answer_5_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_5_3" name="QuizAnswerId_5_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_5_3" id="Answer_5_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_5_4" name="QuizAnswerId_5_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_5_4" id="Answer_5_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_5" id="CorrectAnswerId_5">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 6</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_6" id="QuizQuestionId_6" value="0" />
+                                                <textarea class="form-control main-input" id="Question_6" name="Question_6" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_6_1" name="QuizAnswerId_6_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_6_1" id="Answer_6_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_6_2" name="QuizAnswerId_6_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_6_2" id="Answer_6_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_6_3" name="QuizAnswerId_6_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_6_3" id="Answer_6_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_6_4" name="QuizAnswerId_6_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_6_4" id="Answer_6_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_6" id="CorrectAnswerId_6">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 7</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_7" id="QuizQuestionId_7" value="0" />
+                                                <textarea class="form-control main-input" id="Question_7" name="Question_7" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_7_1" name="QuizAnswerId_7_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_7_1" id="Answer_7_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_7_2" name="QuizAnswerId_7_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_7_2" id="Answer_7_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_7_3" name="QuizAnswerId_7_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_7_3" id="Answer_7_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_7_4" name="QuizAnswerId_7_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_7_4" id="Answer_7_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_7" id="CorrectAnswerId_7">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 8</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_8" id="QuizQuestionId_8" value="0" />
+                                                <textarea class="form-control main-input" id="Question_8" name="Question_8" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_8_1" name="QuizAnswerId_8_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_8_1" id="Answer_8_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_8_2" name="QuizAnswerId_8_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_8_2" id="Answer_8_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_8_3" name="QuizAnswerId_8_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_8_3" id="Answer_8_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_8_4" name="QuizAnswerId_8_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_8_4" id="Answer_8_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_8" id="CorrectAnswerId_8">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 9</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_9" id="QuizQuestionId_9" value="0" />
+                                                <textarea class="form-control main-input" id="Question_9" name="Question_9" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_9_1" name="QuizAnswerId_9_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_9_1" id="Answer_9_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_9_2" name="QuizAnswerId_9_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_9_2" id="Answer_9_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_9_3" name="QuizAnswerId_9_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_9_3" id="Answer_9_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_9_4" name="QuizAnswerId_9_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_9_4" id="Answer_9_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_9" id="CorrectAnswerId_9">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="my-5">
+                                            <div class="px-2">
+                                                <h4 class="main-txt">Question 10</h4>
+                                            </div>
+                                            <div class="col-xs-6 my-2 px-2">
+                                                <input type="hidden" name="QuizQuestionId_10" id="QuizQuestionId_10" value="0" />
+                                                <textarea class="form-control main-input" id="Question_10" name="Question_10" rows="6" placeholder="Enter your question here"></textarea>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 my-2 px-2">
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">a</span>
+                                                        <input type="hidden" id="QuizAnswerId_10_1" name="QuizAnswerId_10_1" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_10_1" id="Answer_10_1" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">b</span>
+                                                        <input type="hidden" id="QuizAnswerId_10_2" name="QuizAnswerId_10_2" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_10_2" id="Answer_10_2" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">c</span>
+                                                        <input type="hidden" id="QuizAnswerId_10_3" name="QuizAnswerId_10_3" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_10_3" id="Answer_10_3" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon main-input qtext">d</span>
+                                                        <input type="hidden" id="QuizAnswerId_10_4" name="QuizAnswerId_10_4" value="0">
+                                                        <input type="text" class="form-control main-input" name="Answer_10_4" id="Answer_10_4" placeholder="Enter your answer here">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 px-0 mb-3">
+                                                    <div>
+                                                        <select class="form-control main-input" name="CorrectAnswerId_10" id="CorrectAnswerId_10">
+                                                            <option>Correct answer</option>
+                                                            <option value="1">a</option>
+                                                            <option value="2">b</option>
+                                                            <option value="3">c</option>
+                                                            <option value="4">d</option>
+                                                        </select>
+                                                        @*<i class="fas fa-caret-down"></i>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Status <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds" id="Status" name="Status" bindval="">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">InActive</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group form-actions">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-9">
+                                                <button class="btn vd_btn vd_bg-green vd_white" onclick="return validate()" type="submit"><i class="icon-ok"></i>Save</button>
+                                                @Html.ActionLink("Cancel", "ViewSmartQuiz", new { controller = "SmartQuiz" }, new { @class = "btn btn-danger" })
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-4" id="qrcode">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<link href="@Url.Content(Globalsettings.admincsspath("daterangepicker-bs3.css?v=1.0.0"))" rel="stylesheet" type="text/css">*@
+<link href="@Url.Content(Globalsettings.admincsspath("bootstrap-multiselect.css"))" rel="stylesheet" type="text/css">
+<link href="@Url.Content(Globalsettings.admincsspath("bs-datetime.css"))" rel="stylesheet" />
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("bootstrap-multiselect.js"))"></script>
+@*<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("daterangepicker.js?v=1.0.0"))"></script>*@
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("moment.min.js?v=1.0.0"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.unobtrusive.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("inputmask.js"))"></script>
+<script src="@Url.Content(Globalsettings.adminjspath("bootstrap-datepicker.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("quiz.js"))"></script>
+<style>
+    .input-group {
+        padding-bottom: 10px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        GetquizQandAedit();
+        if ($("#TotalPlayed").val() != 0) {
+            $('.game').prop('readonly', true);
+            $('.gamed').prop('disabled', true);
+            alert("Game is in play mode, Please don't make changes.");
+        }
+    })
+</script>
+<script>
+    $(document).ready(function () {
+
+    });
+</script>
+<script>
+
+    //$('.date').datepicker({
+    //    format: 'dd-mm-yyyy',
+    //    startDate: '-3d'
+    //});
+    $('.date').datepicker({
+        format: 'dd-M-yyyy',
+        widgetPositioning: {
+            horizontal: 'right',
+            vertical: 'bottom'
+        },
+        // sideBySide: true,
+        icons: {
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-check',
+            clear: 'fa fa-trash',
+            close: 'fa fa-times'
+        }
+    });
+    $(function () {
+        if (window.jQuery().datetimepicker) {
+            $('.datetime').datetimepicker({
+                format: 'DD-MMM-YYYY hh:mm a',
+                widgetPositioning: {
+                    horizontal: 'right',
+                    vertical: 'bottom'
+                },
+                // sideBySide: true,
+                icons: {
+                    time: 'fa fa-clock',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-check',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            });
+        }
+    });
+</script>
+
+

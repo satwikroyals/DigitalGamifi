@@ -1,0 +1,557 @@
+﻿
+@{
+    ViewBag.Title = "QuizPrizes";
+    Layout = "~/Areas/Business/Views/Shared/_LayoutBusiness.cshtml";
+}
+
+@using DIGITAL_GAMIFY.Code
+@model DIGITAL_GAMIFY.Entities.SmartQuizQuestionAndAnswer
+
+<link href="@Url.Content(Globalsettings.admincsspath("select2.min.css"))" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("select2.full.js"))"></script>
+@*<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("prizes.js"))"></script>*@
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header mylinks">
+                    <ul class="breadcrumb">
+                        <li>QuizPrizes </li>
+                        <li class="active">View</li>
+                    </ul>
+                    <div class="vd_panel-menu hidden-sm hidden-xs resize-content" data-intro="" data-step="5" data-position="left">
+                        <div data-action="remove-navbar" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-navbar-button menu"><i class="fa fa-arrows-h"></i></div>
+                        <div data-action="remove-header" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-header-button menu"><i class="fa fa-arrows-v"></i></div>
+                        <div data-action="fullscreen" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="fullscreen-button menu"><i class="glyphicon glyphicon-fullscreen"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd_content-section clearfix subdiv">
+                <div class="col-lg-12 divsearch">
+                    <div class="col-lg-3">
+                        <label class="navpad"> <i class="fa fa-building-o iconcolr" aria-hidden="true"></i> Select Game</label>
+                        <div class="form-group">
+                            <select class="ddlbusinesstypeid" data-placeholder="No Games found" id="GameId">
+                                <option value="0">Select Game</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="navpad"> <i class="fa fa-building-o iconcolr" aria-hidden="true"></i> Select Prize Number</label>
+                        <div class="form-group">
+                            <select class="ddlbusinesstypeid" data-placeholder="Not found" id="Prize">
+                                <option value="0">Select Prize</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="-1">All Winners</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="col-sm-10 control-label navpad">Search</label>
+                        <div class="input-group col-sm-12">
+                            <input type="text" placeholder="Search Game Title" id="search">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 hide">
+                        <label class="col-sm-10 control-label navpad">From</label>
+                        <div class="input-group col-sm-12">
+                            <input type="text" placeholder="Date" id="from" readonly>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default cal-time" type="button">  <i class="fa fa-calendar iconcolr" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 hide">
+                        <label class="col-sm-10 control-label navpad">To</label>
+                        <div class="input-group col-sm-12">
+                            <input type="text" placeholder="Date" id="to" readonly>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default cal-time" type="button">  <i class="fa fa-calendar iconcolr" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="navpad"></label>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary searchrowbtn mr-10" id="btnShow">Search</button>
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10" id="btnShowAll">Show All</button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 my-4">
+                        <div class="modal-footer1">
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10 exportToExcel" id="ExportToExcel" onclick="exceller()">Export To Excel</button>
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10" onclick="generate()">Export To Pdf</button>
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10" id="csv" onclick="exportCsv()">Export To csv</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 valerr"></div>
+                </div>
+                <input type="hidden" id="BusinessId" value="@ViewBag.id" />
+                <input type="hidden" id="Status" value="0" />
+                <div class="col-xs-12 hrline-break"><hr></div>
+                <div class="pageloader hide"></div>
+                <div class="col-lg-12 tbbg2 pagecontent grid-pi history">
+                    <div class="col-lg-12 hide nodata dataerr" id="norec">
+                        No QuizPrizes Found.
+                    </div>
+                    <div id="tblgrid" class="hide">
+                        <div class="col-lg-12 grid-i">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    Total QuizPrizes : <span id="totalrec">0</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    Page Size :
+                                    <select name="ddlpagesize" id="ddlpagesize" class="form-control ps">
+                                        <option>25</option>
+                                        <option>50</option>
+                                        <option>75</option>
+                                        <option>100</option>
+                                        <option>200</option>
+                                        <option>300</option>
+                                        <option>400</option>
+                                        <option>500</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-right">
+                                <div class="form-group" id="showpageinfo">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-right">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <div class="tblcontent">
+                            <div class="table-responsive" id="tableclient">
+                                <table id="tbldataabs" class="mytbl table display dttbl table-striped table-hover">
+                                    <thead class="oc-thead">
+                                        <tr>
+                                            <th>Game</th>
+                                            <th>CustomerName</th>
+                                            <th>Prize Image</th>
+                                            <th>Prize Details</th>
+                                            <th>RedeemCode</th>
+                                            <th>Delivered Date</th>
+                                            <th>View</th>
+                                            <th>Deliver</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="oc-tbody" id="tbldata"></tbody>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="px-2 my-2 pull-right">
+                                <ul class="pagination m-0">
+                                    <li class="active"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="enquiry-model" role="dialog">
+    <div class="modal-dialog modal-dialog-cstm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="get-discount-block">
+
+
+                    <form accept-charset="UTF-8" action="" class="infusion-form" id="" method="" name="Enquire now Form" onsubmit="submitWebForm()">
+
+
+                        <input name="inf_form_xid" type="hidden" />
+                        <input name="inf_form_name" type="hidden" />
+                        <input name="infusionsoft_version" type="hidden" />
+
+                        <div class="title">
+                            <div class="title" contentid="title">
+                                <div class="get-discount-block-tittle">Details</div>
+                            </div>
+                        </div>
+
+                        <div class="tblcontent">
+                            <div class="table-responsive">
+                                <table id="tbldataabs" class="mytbl table display dttbl table-striped table-hover">
+                                    <thead class="oc-thead">
+                                        <tr>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
+                                            <th>Physical Prize Details</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="oc-tbody" id="resulttble">
+                                        @*<tr><td>6612553277</td><td>bsmalls93@gmail.com</td><td>null/null</td><td>flhdfhkjdfhjkd</td></tr>*@
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </div>
+                        <div class="infusion-submit">
+                            <button type="button" class="discount-button" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<table id="simple_table" class="hide table2excel">
+    <tr>
+        <th>Game</th>
+        <th>Customer</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>Prize Details</th>
+        <th>Address</th>
+    </tr>
+    <tbody class="oc-tbody" id="tbldatapdf"></tbody>
+</table>
+
+<!--Date time picker css,Js-->
+<link href="@Url.Content(Globalsettings.admincsspath("daterangepicker-bs3.css?v=1.0.0"))" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("daterangepicker.js?v=1.0.0"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("moment.min.js?v=1.0.0"))"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
+<script src="~/Content/tableToCsv.js"></script>
+
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+<script src="~/Content/tableHTMLExport.js"></script>
+<script>
+    $('#csv').on('click', function () {
+        Exportdata();
+        $("#simple_table").tableHTMLExport({ type: 'csv', filename: 'quizprizes.csv' });
+    })
+</script>
+
+<script>
+    try {
+        fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function (response) {
+            return true;
+        }).catch(function (e) {
+            var carbonScript = document.createElement("script");
+            carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+            carbonScript.id = "_carbonads_js";
+            document.getElementById("carbon-block").appendChild(carbonScript);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+</script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>*@
+
+<script>
+    $(document).ready(function () {
+        getquizddl();
+        SetViewQuizPrizePage();
+    });
+    function getquizddl() {
+        var bid = $('#BusinessId').val();
+        gl.ajaxreq(websiteurlapi + "GetddlQuizes", "GET", { bid: bid }, function (response) {
+            if (response != null && response.length > 0) {
+                $.each(response, function (i, item) {
+                    $("#GameId").append('<option value="' + item.QuizId + '">' + item.QuizName + '</option>');
+                });
+            }
+        }, '', '', '', '', false, false);
+    }
+    function SetViewQuizPrizePage() {
+        $('#from,#to').daterangepicker({
+            defaultDate: null,
+            singleDatePicker: true,
+            showDropdowns: true,
+            minDate: moment().subtract(10, 'years'),
+            "opens": "left",
+            locale: {
+                format: 'DD MMM, YYYY'
+            }
+        }, function (chosen_date) {
+            // $('#' + this.element[0].id).val(chosen_date.format('DD MMM, YYYY'));
+        });
+
+        //var bid = SetQueryStDefaultVal("_b", 0);
+        //bid = bid == -1 ? 0 : bid;
+
+        var fr = SetQueryStDefaultVal("_f", "");
+        $("#from").val(fr);
+        var to = SetQueryStDefaultVal("_t", "");
+        $("#to").val(to);
+
+        var str = SetQueryStDefaultVal("_str", "");
+        $("#search").val(str);
+
+        var g = SetQueryStDefaultVal("_g", 0);
+        g = g == -1 ? 0 : g;
+
+        var prize = SetQueryStDefaultVal("_p", 0);
+        prize = prize == -1 ? 0 : prize;
+
+        var pi = SetQueryStDefaultVal("_pi", 1);
+        var ps = SetQueryStDefaultVal("_ps", 25);
+        $("#ddlpagesize").val(ps);
+
+        $('#btnShowAll').on("click", function (event) {
+            window.location.href = GetUrlWithNoQueryStrings();
+        });
+
+        //Search event handler.
+        $('#btnShow').on("click", function (event) {
+            var dateerror = CheckDatesDiff($('#from').val(), $('#to').val(), 10, 0);
+            var errObj = [];
+            var hasErrors = false;
+            if (dateerror != "") {
+                hasErrors = true;
+                errObj.push(dateerror);
+            }
+            if (hasErrors == false) {
+                window.location.href = GetUrlWithNoQueryStrings() + "?_b=" + $("#BusinessId").val() + "&_f=" + $("#from").val() + "&_t=" + $("#to").val() + "&_pi=" + pi + "&_str=" + $("#search").val() + "&_g=" + $("#GameId").val() + "&_p=" + $("#Prize").val();
+            }
+            SearchVsdisplay(errObj);
+        });
+
+        SetViewQuizPrizesGrid(pi, ps);
+
+        function SetViewQuizPrizesGrid(pageindex, pagesize) {
+            var status = $("#Status").val();
+            var row = '';
+            var reccount = 0;
+            gl.ajaxreqloader(websiteurlapi + "/AdminGetQuizPrizes", "get", { bid: bid, status: status, pgindex: pageindex, pgsize: pagesize, str: str,gid:g,prize:prize }, function (response) {
+                if (response.length > 0) {
+                    $('#tblgrid').removeClass('hide');
+                    $('#norec').addClass('hide');
+                    reccount = response[0].TotalRecords;
+                    $.each(response, function (i, item) {
+                        row += "<tr><td>" + item.QuizName + "</td><td>" + item.CustomerName + "</td><td><img src='" + item.PrizeImagePath + "' class='grimg'/></td><td>" + item.PrizeText + "</td><td>" + item.RedeemCode + "</td><td>" + item.DeliverDateString + "</td><td><button onclick='Show(" + item.ResultId + ',' + 2 + ")'><i class='fa fa-eye'></i></button></td><td><button onclick='DeliverPrize(" + item.ResultId + ',' + 2 + ")'><i class='fa fa-check'></i></button></td></tr>";
+                    });
+                    $("#tbldata").html(row);
+                    setPaging(reccount, pageindex, pagesize);
+                }
+                else {
+                    $('#norec').removeClass('hide');
+                    $('#tblgrid').addClass('hide');
+                }
+
+            }, '', '', '', '', false, false);
+        }
+
+        $(document).on("click", ".d-paging", function (event) {
+            var pagesize = $('#ddlpagesize').val();
+            var pageindex = $(this).attr('_id');
+            window.history.pushState(null, "", GetUrlWithNoQueryStrings() + "?_b=" + $("#ddlsearchbusiness").val() + "&_f=" + $("#from").val() + "&_t=" + $("#to").val() + "&_pi=" + pageindex + "&_ps=" + pagesize + "&_str=" + $("#search").val() + "&_g=" + $("#GameId").val() + "&_p=" + $("#Prize").val());
+            SetViewSwipeanWinGrid(pageindex, pagesize);
+        });
+        $(document).on("change", '#ddlpagesize', function (event) {
+            var pagesize = $('#ddlpagesize').val();
+            var pageindex = 1;
+            window.history.pushState(null, "", GetUrlWithNoQueryStrings() + "?_b=" + $("#ddlsearchbusiness").val() + "&_f=" + $("#from").val() + "&_t=" + $("#to").val() + "&_pi=" + pageindex + "&_ps=" + pagesize + "&_str=" + $("#search").val() + "&_g=" + $("#GameId").val() + "&_p=" + $("#Prize").val());
+            SetViewSwipeanWinGrid(pageindex, pagesize);
+        });
+
+    }
+    function DeliverPrize(rid, type) {
+        var ans = confirm("Are you Sure?");
+        if (ans) {
+            gl.ajaxreq(websiteurlapi + "BusinessDeliverprizeactionbtn?resultid=" + rid + "&type=" + type + "&action=1", "GET", null, function (response) {
+                if (response != null) {
+                    alert('Delivered.');
+                    SetViewQuizPrizePage();
+                }
+            }, '', '', '', '', false, false);
+        }
+    }
+    function Show(resultid, type) {
+        $('#enquiry-model').modal('show');
+        var row = '';
+        gl.ajaxreq(websiteurlapi + "GetResultById", "get", { resultid: resultid, type: type }, function (response) {
+            if (response != null) {
+                row += "<tr><td>" + response.Mobile + "</td><td>" + response.Email + "</td><td>" + response.Size + '/' + response.Colour + "</td><td>" + response.Address + "</td></tr>";
+                $("#resulttble").html(row);
+            }
+        }, '', '', '', '', false, false);
+    }
+
+
+    function Exportdata() {
+        $('#from,#to').daterangepicker({
+            defaultDate: null,
+            singleDatePicker: true,
+            showDropdowns: true,
+            minDate: moment().subtract(10, 'years'),
+            "opens": "left",
+            locale: {
+                format: 'DD MMM, YYYY'
+            }
+        }, function (chosen_date) {
+            // $('#' + this.element[0].id).val(chosen_date.format('DD MMM, YYYY'));
+        });
+
+        //var bid = SetQueryStDefaultVal("_b", 0);
+        //bid = bid == -1 ? 0 : bid;
+
+        var fr = SetQueryStDefaultVal("_f", "");
+        $("#from").val(fr);
+        var to = SetQueryStDefaultVal("_t", "");
+        $("#to").val(to);
+
+        var str = SetQueryStDefaultVal("_str", "");
+        $("#search").val(str);
+
+        var g = SetQueryStDefaultVal("_g", 0);
+        g = g == -1 ? 0 : g;
+
+        var prize = SetQueryStDefaultVal("_p", 0);
+        prize = prize == -1 ? -1 : prize;
+
+        var pi = SetQueryStDefaultVal("_pi", 1);
+        var ps = SetQueryStDefaultVal("_ps", 25);
+        $("#ddlpagesize").val(ps);
+
+        SetExportQuizGrid(pi, ps);
+
+        function SetExportQuizGrid(pageindex, pagesize) {
+            var status = $("#Status").val();
+            var row = '';
+            var pdfrow = '';
+            var reccount = 0;
+            gl.ajaxreqloader(websiteurlapi + "/AdminGetQuizPrizes", "get", { bid: bid, status: status, pgindex: pageindex, pgsize: -1, str: str, gid: g, prize: prize }, function (response) {
+                if (response.length > 0) {
+                    reccount = response[0].TotalRecords;
+                    $.each(response, function (i, item) {
+                        pdfrow += "<tr><td>" + item.QuizName + "</td><td>" + item.CustomerName + "</td><td>" + item.Mobile + "</td><td>" + item.Email + "</td><td>" + item.PrizeText + "</td><td>" + item.Address + "</td></tr>";
+                    });
+                    $("#tbldatapdf").html(pdfrow);
+                }
+
+            }, '', '', '', '', false, false);
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function generate() {
+        Exportdata();
+        var doc = new jsPDF('p', 'pt', 'letter');
+        var htmlstring = '';
+        var tempVarToCheckPageHeight = 0;
+        var pageHeight = 0;
+        pageHeight = doc.internal.pageSize.height;
+        specialElementHandlers = {
+            // element with id of "bypass" - jQuery style selector
+            '#bypassme': function (element, renderer) {
+                // true = "handled elsewhere, bypass text extraction"
+                return true
+            }
+        };
+        margins = {
+            top: 150,
+            bottom: 60,
+            left: 40,
+            right: 40,
+            width: 700
+        };
+        var y = 20;
+        doc.setLineWidth(2);
+        doc.text(200, y = y + 30, "TOTAL WINNERS");
+        doc.autoTable({
+            html: '#simple_table',
+            startY: 70,
+            theme: 'grid',
+            columnStyles: {
+                0: {
+                    cellWidth: 90,
+                },
+                1: {
+                    cellWidth: 90,
+                },
+                2: {
+                    cellWidth: 90,
+                },
+                3: {
+                    cellWidth: 90,
+                },
+                4: {
+                    cellWidth: 90,
+                },
+                5: {
+                    cellWidth: 90,
+                }
+            },
+            styles: {
+                minCellHeight: 30
+            }
+        })
+        doc.save('Quizprizes.pdf');
+    }
+
+    function exceller() {
+        Exportdata();
+        var uri = 'data:application/vnd.ms-excel;base64,',
+          template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+          base64 = function (s) {
+              return window.btoa(unescape(encodeURIComponent(s)))
+          },
+          format = function (s, c) {
+              return s.replace(/{(\w+)}/g, function (m, p) {
+                  return c[p];
+              })
+          }
+        var toExcel = document.getElementById("simple_table").innerHTML;
+        var ctx = {
+            worksheet: name || '',
+            table: toExcel
+        };
+        var link = document.createElement("a");
+        link.download = "Quizprizes.xls";
+        link.href = uri + base64(format(template, ctx))
+        link.click();
+    }
+    function exportCsv() {
+        Exportdata();
+        $('#simple_table').tableToCsv({
+            filename: 'Quizprizes.csv',
+            colspanMode: 'replicate'
+        });
+    }
+
+</script>
+
+

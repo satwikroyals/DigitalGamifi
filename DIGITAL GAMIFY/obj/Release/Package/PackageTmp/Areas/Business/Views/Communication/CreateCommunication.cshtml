@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Title = "CreateCommunication";
+    Layout = "~/Areas/Business/Views/Shared/_LayoutBusiness.cshtml";
+}
+
+@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code;
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header mylinks">
+                    <ul class="breadcrumb">
+                        <li>Communication </li>
+                        <li class="active">Create</li>
+                    </ul>
+                    <div class="vd_panel-menu hidden-sm hidden-xs resize-content" data-intro="" data-step="5" data-position="left">
+                        <div data-action="remove-navbar" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-navbar-button menu"><i class="fa fa-arrows-h"></i></div>
+                        <div data-action="remove-header" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-header-button menu"><i class="fa fa-arrows-v"></i></div>
+                        <div data-action="fullscreen" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="fullscreen-button menu"><i class="glyphicon glyphicon-fullscreen"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal" style="padding: 2px;">
+                @using (Html.BeginForm("AddCommunication", "Communication", FormMethod.Post, new { id = "subfrom", enctype = "multipart/form-data" }))
+                {
+                    <div class="col-md-12 col-xs-12 my-4 divsearch">
+                        <div class="alert alert-danger vsdiv-full bo-l-0 bo-r-0 bo-rad-0 clearfix @(Html.ViewData.ModelState.IsValid?"hide":"show")" id="error" tabindex='1'>
+                            <span>Errors List</span>
+                            @Html.ValidationSummary()
+                        </div>
+                        <div class="row" id="auto-complete-input">
+                            <div class="my-2">
+                                <input type="hidden" id="CommunicationId" name="CommunicationId" value="0" />
+                                <input type="hidden" id="CommunicationTypeId" name="CommunicationTypeId" value="1">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Title : <span class="vd_red">*</span></label>
+                                    <div class="col-sm-5 controls">
+                                        <input type="text" class="width-70 width-110 myfilds mytxtfilds isvalidate" errormsg="Please Enter Title" name="Title" id="Title" placeholder="Title" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Email Text : <span class="vd_red">*</span></label>
+                                    <div class="col-sm-5 controls">
+                                        <textarea class="width-70 width-110 myfilds mytxtfilds isvalidate" rows="5" errormsg="Please Enter Message" id="EmailText" name="EmailText" placeholder="Email Text"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Promotional Image : <span class="vd_red">*</span></label>
+                                    <div class="col-sm-5 controls">
+                                        <img id="Image" src="" class="previewimg" /><br /><br />
+                                        <input type="file" class="width-70 width-110 myfilds mytxtfilds isvalidate" errormsg="Please Select Image" id="ImageFile" name="ImageFile" placeholder="Upload Email Image" onchange="readURL(this, 'Image');" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">QrCode : <span class="vd_red"></span></label>
+                                    <div class="col-sm-5 controls">
+                                        <img id="QrCode" src="" class="previewimg" /><br /><br />
+                                        <input type="file" class="width-70 width-110 myfilds mytxtfilds" id="QrFile" name="QrFile" placeholder="Upload QrCode Image" onchange="readURL(this, 'QrCode');" />
+                                    </div>
+                                </div>
+                                <div class="col-md-9 col-sm-4 my-2 px-2">
+                                    <input type="hidden" value="" class="isvalidate" errormsg="Please Select Members" name="chkedcustomers" id="chkedcustomers">
+                                </div>
+                                <div class="form-group form-actions">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-9">
+                                        <button class="btn vd_btn vd_bg-green vd_white" onclick="return validate()" type="submit"><i class="icon-ok"></i>Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="vd_content-section clearfix subdiv">
+                <div class="col-lg-12 divsearch">
+                    <div class="col-lg-2">
+                        <label class="navpad"> <i class="fa fa-building-o iconcolr" aria-hidden="true"></i> Select Agegroup</label>
+                        <div class="form-group">
+                            <select data-placeholder="No outlets found" id="Agegroup">
+                                <option value="0">select</option>
+                                <option value="1">10-21</option>
+                                <option value="2">22-40</option>
+                                <option value="3">41-65</option>
+                                <option value="4">65+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="navpad"> <i class="fa fa-building-o iconcolr" aria-hidden="true"></i> Select Gender</label>
+                        <div class="form-group">
+                            <select class="" data-placeholder="No outlets found" id="gender">
+                                <option value="0">select</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="col-sm-10 control-label navpad">Search</label>
+                        <div class="input-group col-sm-12">
+                            <input type="text" placeholder="Search Name" id="search">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="navpad"></label>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary searchrowbtn mr-10" id="btnShow">Search</button>
+                            <button type="button" class="btn btn-primary searchrowbtn ml-10" id="btnShowAll">Clear</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 valerr"></div>
+                </div>
+
+                <div class="col-xs-12 hrline-break"><hr></div>
+                <div class="pageloader hide"></div><input type="hidden" id="BusinessId" value="@ViewBag.id" />
+
+
+                <div class="col-lg-12 tbbg2 pagecontent grid-pi history">
+                    <div class="col-lg-12 hide nodata dataerr" id="norec">
+                        No Guest Found.
+                    </div>
+                    <div id="tblgrid">
+                        <div class="col-lg-12 grid-i">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    Total Customers : <span id="totalrec">0</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    Page Size :
+                                    <select name="ddlpagesize" id="ddlpagesize" class="form-control ps">
+                                        <option>25</option>
+                                        <option>50</option>
+                                        <option>75</option>
+                                        <option>100</option>
+                                        <option>200</option>
+                                        <option>300</option>
+                                        <option>400</option>
+                                        <option>500</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-right">
+                                <div class="form-group" id="showpageinfo">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-right">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <div class="tblcontent">
+                            <div class="table-responsive">
+                                <table id="tbldataabs" class="mytbl table display dttbl table-striped table-hover">
+                                    <thead class="oc-thead">
+                                        <tr>
+                                            <th class="col-lg-4">
+                                                <input type="checkbox" class="allpgchk">All <br />
+                                                <input type="checkbox" class="curpgchk">Pagewise 
+                                            </th>
+                                            <th class="col-lg-2">Name</th>
+                                            <th class="col-lg-4">Mobile</th>
+                                            <th class="col-lg-2">Email</th>
+                                            <th>Age Group</th>
+                                            <th>Gender</th>
+                                            <th>ZipCode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="oc-tbody" id="tbldata"></tbody>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="px-2 my-2 pull-right">
+                                <ul class="pagination m-0">
+                                    <li class="active"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        @*<div class="row pl-5 mt-5">
+                <button type="button" class="btn vd_btn vd_bg-green vd_white" id="subbtn" onclick="sendcommunication('subfrom')">Send</button>
+            </div>*@
+    </div>
+</div>
+
+
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.unobtrusive.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("inputmask.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("communication.js"))"></script>
+
+<script>
+    $(document).ready(function () {
+        SetCustomersPage();
+    });
+</script>
+

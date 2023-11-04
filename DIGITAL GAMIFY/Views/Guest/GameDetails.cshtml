@@ -1,0 +1,237 @@
+﻿@{
+    Layout = null;
+}
+@using DIGITAL_GAMIFY.Code;
+
+@{
+    // Response.Cache.SetNoStore();
+    if (Convert.ToInt32(Request.QueryString["cid"]) == 0)
+    {
+        Response.Redirect("~/Guest/Register");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Swipe & WIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="~/customercontent/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/customercontent/css/styles.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        var websiteurlapi = '@Globalsettings.GetWebSiteUrlApi()';
+        var websiteurl = '@Globalsettings.GetWebSiteUrl()';
+        //alert(currenturl);
+        @*@{
+            var cid = 0;
+            if (cid == 0)
+            {
+                Response.Redirect("~/Guest/Register");
+            }
+        }*@
+    </script>
+</head>
+<body>
+    <div class="main-row">
+        <div class="">
+            <div class="">
+                <div class="frame-border">
+                    <div class="container-fluid p-0 content-h boxscroll do-nicescrol4">
+                        <div class="wrap" id="nogames" style="display:none">
+                            <div class="mt-4 mb-3">
+                                <div class="mt-3"><img src="~/Content/images/logo.png" class="img-fl  uid w-50" height="100px"></div>
+                                <h4 class="t-color">Hi ,</h4>
+                                <h6 class="px-3 py-3">Sorry it seems like you already played the game.</h6>
+                                @*<h6 class="px-3 py-1">Please click below to download the App.</h6>*@
+                                @*<a href="#" class="bt n btn-in fo g-b  tn px-5 rou  nded-0" onclick="Downloadapp()"><img src="~/Content/images/en_badge_web_generic.png" height="80px" width="220px" /></a>
+                    <a href="#" class="b tn b tn-i nfo g-bt n px-5 ro unded-0" onclick="Downloadiosapp()"><img src="~/Content/images/5a902db97f96951c82922874.png" height="60px" width="195px" /></a>*@
+
+                            </div>
+                        </div>
+                        <div class="wrap" id="game" style="display:none">
+
+                            <div class="mt-4 mb-3">
+                                <div class="mt-3"><img src="~/Content/images/logo.png" class="img-fl  uid w-50" height="100px"></div>
+                                <h4 class="t-color">Hi ,</h4>
+                                <input type="hidden" id="BusinessId" value="0" />
+                                <input type="hidden" id="GameName" value="" />
+                                <input type="hidden" id="prize" src="">
+                                <input type="hidden" id="gid" value="@ViewBag.gid" />
+                                <input type="hidden" id="" value="@ViewBag.url" />
+                                <input type="hidden" name="CustomerId" id="CustomerId" value="@Request.QueryString["cid"]" />
+                                <input type="hidden" id="email" value="@Request.QueryString["_m"]" />
+
+                                <h6 class="px-3 py-3">Please rub your finger over the panel below to play</h6>
+                                <div class="my-2">
+                                    <div class="scratch" style="z-index:1000;position: relative;margin:0 auto;
+  -webkit-transform: translate(-50%, 0%);
+  -moz-transform: translate(-50%, 0%);    /* Older Gecko browser */
+  -ms-transform: translate(-50%, 0%);     /* IE9+ */
+  -o-transform: translate(-50%, 0%);
+  transform: translate(7%, 0%);text-align:center;">
+
+                                    </div>
+                                </div>
+                                <div style="display:none" id="prizedetails">
+                                    <h6 class="px-3 py-3"><span id="prizemessage"></span></h6>
+                                    <input type="hidden" id="prizeid" value="4" />
+                                    <input type="hidden" id="prizenumber" value="4">
+                                    <div id="complimentary" style="display:block">
+                                        <h6 class="px-3 py-3">
+                                            please provide the following details to claim the prize.
+                                        </h6>
+                                        <div id="physical1"></div>
+
+                                        <div id="physical2"></div>
+
+                                        <div id="physical3"></div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="Address" id="Address" placeholder="Address"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <a href="#" class="btn btn-info g-btn px-5 rounded-0" onclick="RedeemPrize()">Continue</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="circle-button"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="~/customercontent/js/jquery-3.5.1.slim.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+    <script type="text/javascript" src="~/Content/js/jquery.min.js"></script>
+    <script src="~/customercontent/js/popper.min.js"></script>
+    <script src="~/customercontent/js/bootstrap.min.js"></script>
+    <script src="~/customercontent/js/global.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.js"></script>
+    <script type="text/javascript">
+        $(".do-nicescrol4").niceScroll(".wrap");
+    </script>
+    <script type="text/javascript">$("body").niceScroll();</script> -->
+    <img src="~/customercontent/images/3.png" hidden="hidden" id="swipe" />
+    <script src="~/customercontent/js/wScratchPad.js"></script>
+    <script>
+        var gid = $('#gid').val();
+        var cid = $('#CustomerId').val();
+
+        getplaygamebyid(gid);
+
+        function ChkScratch(p) {
+            if (p > 50) {
+                $('#prizedetails').css('display', 'block');
+                if ($("#prizenumber").val() == 0) {
+                    $("#complimentary").css("display", "none");
+                }
+            }
+        }
+
+        function getplaygamebyid(gid) {
+            gl.ajaxreq(websiteurlapi + 'GetSwipeGamePlayDetails', 'get', { Id: gid, CId: cid }, function (response) {
+                console.log(response);
+                if (response.Status) {
+                    if (response.Success) {
+                        var data = response.Data;
+                        $(".img-fl").attr('src', data.GameDetails.ImagePath)
+                        if (data.GameDetails.Finish == 0) {
+                            $("#game").css("display", "block");
+                            if (data.GameDetails.PhysicalPrize1 == 1 && data.PrizeDetails.PrizeNumber == 1) {
+                                $("#complimentary").css("display", "block");
+                                $.each(data.GameDetails.Attrlist, function (a, attri) {
+                                    $('#physical1').append('<div class="form-group">' +
+                                 '<label class="col-sm-2 control-label">' + attri.Attribute + '</label>' +
+                                 '<select name="' + attri.Attribute + '" class="form-control" id="physical1' + attri.Attribute + '" aria-describedby="emailHelp" placeholder="Enter Colour">' +
+                                 '</select>' +
+                                 '</div>');
+                                    $.each(attri.values, function (i, size) {
+                                        $('#physical1' + attri.Attribute).append("<option value='" + size + "'>" + size + "</option>");
+                                    });
+                                });
+                            }
+                            else if (data.GameDetails.PhysicalPrize2 == 1 && data.PrizeDetails.PrizeNumber == 2) {
+                                $("#complimentary").css("display", "block");
+                                $.each(data.GameDetails.Attrlist2, function (a, attri) {
+                                    $('#physical2').append('<div class="form-group">' +
+                                 '<label class="col-sm-2 control-label">' + attri.Attribute + '</label>' +
+                                 '<select name="' + attri.Attribute + '" class="form-control" id="physical2' + attri.Attribute + '" aria-describedby="emailHelp" placeholder="Enter Colour">' +
+                                 '</select>' +
+                                 '</div>');
+                                    $.each(attri.values, function (i, size) {
+                                        $('#physical2' + attri.Attribute).append("<option value='" + size + "'>" + size + "</option>");
+                                    });
+                                });
+                            }
+                            else if (data.GameDetails.PhysicalPrize3 == 1 && data.PrizeDetails.PrizeNumber == 3) {
+                                $("#complimentary").css("display", "block");
+                                $.each(data.GameDetails.Attrlist3, function (a, attri) {
+                                    $('#physical3').append('<div class="form-group">' +
+                                 '<label class="col-sm-2 control-label">' + attri.Attribute + '</label>' +
+                                 '<select name="' + attri.Attribute + '" class="form-control" id="physical3' + attri.Attribute + '" aria-describedby="emailHelp" placeholder="Enter Colour">' +
+                                 '</select>' +
+                                 '</div>');
+                                    $.each(attri.values, function (i, size) {
+                                        $('#physical3' + attri.Attribute).append("<option value='" + size + "'>" + size + "</option>");
+                                    });
+                                });
+                            }else{
+							$("#complimentary").css("display", "none");
+							}
+                            $("#prize").attr("src", data.PrizeDetails.PrizePath);
+                            $("#BusinessId").val(data.GameDetails.BusinessId);
+                            $("#GameName").val(data.GameDetails.Title);
+                            $('#prizenumber').val(data.PrizeDetails.PrizeNumber);
+                            if (data.PrizeDetails.PrizeNumber == 0) {
+                                $("#prizemessage").html('<span>' + data.PrizeDetails.PrizeMessage + '</span>');
+                            } else {
+                                $("#prizemessage").html('Congratulations you have won a great prize.<br/><span>' + data.PrizeDetails.PrizeMessage + '</span>');
+                            }
+                            //$('#prizemessage').html(data.PrizeDetails.PrizeMessage);
+                            var sp2 = $(".scratch").wScratchPad({
+                                scratchDown: function (e, percent) { ChkScratch(percent) },
+                                scratchMove: function (e, percent) { ChkScratch(percent) },
+                                scratchUp: function (e, percent) { ChkScratch(percent) },
+                                image: data.PrizeDetails.PrizePath,
+                                image2: $("#swipe").attr('src'),
+                                width: 300,
+                                height: 260
+                            });
+                        }
+                        else {
+                            $("#nogames").css("display", "block");
+                        }
+                    }
+                }
+            }, '', '', '', '', false, false);
+        }
+        function RedeemPrize() {
+            var cid = $("#CustomerId").val();
+            var gid = $("#gid").val();
+            var pznum = $("#prizenumber").val();
+            var size = $('[name="Size"]').val() == undefined ? "" : $('[name="Size"]').val();
+            var colour = $('[name="Color"]').val() == undefined ? "" : $('[name="Color"]').val();
+            var address = $("#Address").val() == undefined ? "" : $("#Address").val();
+            gl.ajaxreq(websiteurlapi + 'RedeemPrize', 'get', { cid: cid, gid: gid, pznum: pznum, Promocheck: 0, Size: size, Colour: colour, Address: address }, function (response) {
+                gl.ajaxreq(websiteurlapi + 'SendDigitalGamifyPrizeNotification', 'post', { Email: $("#email").val(), GameId: $("#gid").val(), PrizeNumber: $("#prizenumber").val(), BusinessId: $("#BusinessId").val(), RedeemCode: response.Data.Message, Title: $("#GameName").val(), PrizePath: $("#prize").attr("src"), PrizeDetails: $("#prizemessage").val(), Type: 1, GameimgPath: $(".img-fl").attr('src') }, function (resp) {
+
+                });
+                //if (pznum > 0) {
+                //    gl.ajaxreq(websiteurlapi + 'SendDigitalGamifyPrizeNotification', 'post', { Email: $("#email").val(), GameId: $("#gid").val(), PrizeNumber: $("#prizenumber").val(), BusinessId: 0, RedeemCode: response.Data.Message }, function (resp) {
+
+                //    });
+                //}
+                window.location.href = "Finish?id=" + $("#BusinessId").val();
+            }, '', '', '', '', false, false);
+        }
+    </script>
+</body>
+</html>

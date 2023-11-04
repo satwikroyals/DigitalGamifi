@@ -1,0 +1,915 @@
+﻿@using DIGITAL_GAMIFY.Entities;
+@using DIGITAL_GAMIFY.Code;
+@model DIGITAL_GAMIFY.Entities.SmartQuizQuestionAndAnswer
+
+@{
+    ViewBag.Title = "AddSmartQuiz";
+    Layout = "~/Areas/Business/Views/Shared/_LayoutBusiness.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("swipeandwin.js"))"></script>
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header mylinks">
+                    <ul class="breadcrumb">
+                        <li>Smart Quiz </li>
+                        <li class="active">Add/Edit</li>
+                    </ul>
+                    <div class="vd_panel-menu hidden-sm hidden-xs resize-content" data-intro="" data-step="5" data-position="left">
+                        <div data-action="remove-navbar" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-navbar-button menu"><i class="fa fa-arrows-h"></i></div>
+                        <div data-action="remove-header" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="remove-header-button menu"><i class="fa fa-arrows-v"></i></div>
+                        <div data-action="fullscreen" data-original-title="" data-toggle="tooltip" data-placement="bottom" class="fullscreen-button menu"><i class="glyphicon glyphicon-fullscreen"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd_content-section clearfix subdiv">
+                <div class="col-lg-12 ">
+                    <div class="row" id="advanced-input">
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+                    <div class="row" id="auto-complete-input">
+                        <div class="col-md-12">
+                            <div class="panel widget">
+                                <div class="panel-heading vd_bg-grey">
+                                    <h3 class="panel-title"><span class="menu-icon"><i class="fa fa-gamepad"></i></span>Add/Edit Smart Quiz </h3>
+                                </div>
+                                <div class="panel-body form-horizontal">
+                                    @using (Html.BeginForm("AddSmartQuiz", "SmartQuiz", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        <div class="alert alert-danger vsdiv-full bo-l-0 bo-r-0 bo-rad-0 clearfix @(Html.ViewData.ModelState.IsValid?"hide":"show")" id="error" tabindex='1'>
+                                            <span>Errors List</span>
+                                            @Html.ValidationSummary()
+                                        </div>
+                                        @*@Html.AntiForgeryToken();*@
+                                        @*@Html.ValidationSummary(false, "", new { @class = "alert alert-danger err" })*@
+                                        <input type="hidden" id="TotalPlayed" name="TotalPlayed" value="@Model.SmartQuizDetails.TotalPlayed" />
+                                        <input type="hidden" id="SmartQuizId" name="SmartQuizId" value="@Request.QueryString["id"]" />
+                                        <div class="clearfix"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Title : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds isvalidate" errormsg="Enter Title" name="SmartQuizName" id="SmartQuizName" value="" placeholder="Title" />
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <label class="col-sm-2 control-label">QuizCode : <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" name="SmartQuizCode" id="SmartQuizCode" value="" placeholder="QuizCode" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">SmsCode : <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" name="SmsCode" id="SmsCode" value="" placeholder="SmsCode" />
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Start Date <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds date isvalidate" errormsg="Select StatDate" name="StartDate" value="" id="StartDate" placeholder="Date" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">End Date <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds date isvalidate" errormsg="Select EndDate" id="EndDate" name="EndDate" value="" placeholder="Date" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Game Info : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <textarea class="width-70 width-110 myfilds mytxtfilds isvalidate" errormsg="Enter GameInfo" name="ShortDescription" id="ShortDescription" placeholder="Game Info"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Game Rules : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <textarea class="width-70 width-110 myfilds mytxtfilds isvalidate" rows="3" errormsg="Enter Conditions" name="Conditions" id="Conditions" placeholder="Game Conditions"></textarea>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                            <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="checkbox" value="1" name="IsComplimentary" id="IsComplimentary" />
+                                            </div>
+                                        </div>*@
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Age Required?<span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="checkbox" value="1" name="IsAgeRequire" id="IsAgeRequire" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Age Condition <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds" id="AgeCondition" name="AgeCondition" bindval="">
+                                                    <option value="1">You must be 18 years and above to enter into the contest.</option>
+                                                    <option value="2">You must be 21 years and above to enter into the contest.</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Game Image : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <img id="imgpreview" src="" class="previewimg" /><br /><br />
+                                                @*@Html.TextBoxFor(m => m.Image, new { @class = "hide" })*@
+                                                <input type="hidden" name="SmartQuizImage" id="SmartQuizImage" value="" />
+                                                <input type="file" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Quiz Image" placeholder="Upload First Prize Image" name="QuizImage" id="QuizImage" onchange="readURL(this, 'imgpreview');" />
+                                                @*@Html.TextBox("ImageFile", null, htmlAttributes: new { name = "ImageFile", @class = "width-70 width-110 myfilds mytxtfilds", type = "file", placeholder = "Upload SwipeanWin Image", id = "ImageFile", onchange = "readURL(this,'imgpreview');" })*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">FirstPrize : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <img id="FirstPrize" src="" class="previewimg" /><br /><br />
+                                                <input type="file" class="width-70 width-110 myfilds mytxtfilds gamed @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select First Prize Image" name="FirstPrizeImagefile" placeholder="Upload First Prize Image" onchange="readURL(this, 'FirstPrize');" />
+                                                <input type="hidden" name="FirstPrizeImage" id="FirstPrizeImage" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">First Prize Count : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds game isvalidate" errormsg="Select First Prize Count" name="FirstPrizeCount" id="FirstPrizeCount" placeholder="Count" value="" />
+                                                <label class="control-label">Prizes Left: <span class="vd_red" id="FirstPrizesLeft"></span></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">First Prize Details : <span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds" name="FirstPrizeText" id="FirstPrizeText" placeholder="Condition" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="checkbox" value="1" name="PhysicalPrize1" id="PhysicalPrize1" onchange="Attr1()" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="attri1" style="display:none">
+                                            <h5 class="m-0 main-txt varians-wrap">Variants (Please enter multiple values with comma separated)</h5>
+                                            <div id="attributes">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">SecondPrize : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <img id="SecondPrize" src="" class="previewimg" /><br /><br />
+                                                <input type="hidden" name="SecondPrizeImage" id="SecondPrizeImage" />
+                                                <input type="file" class="width-70 width-110 myfilds mytxtfilds gamed @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Second Prize Image" name="SecondPrizeImagefile" placeholder="Upload First Prize Image" onchange="readURL(this, 'SecondPrize');" />
+                                                @*@Html.TextBox("ImageFile", null, htmlAttributes: new { name = "ImageFile", @class = "width-70 width-110 myfilds mytxtfilds", type = "file", placeholder = "Upload SwipeanWin Image", id = "ImageFile", onchange = "readURL(this,'imgpreview');" })*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Second Prize Count : <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds game isvalidate" errormsg="Select Second Prize Count" name="SecondPrizeCount" id="SecondPrizeCount" placeholder="Count" value="" />
+                                                <label class="control-label">Prizes Left: <span class="vd_red" id="SecondPrizesLeft"></span></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Second Prize Details : <span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds" name="SecondPrizeText" id="SecondPrizeText" placeholder="Condition" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Physical Prize?<span class="vd_red"></span></label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="checkbox" value="1" name="PhysicalPrize2" id="PhysicalPrize2" onchange="Attr2()" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="attri2" style="display:none">
+                                            <h5 class="m-0 main-txt varians-wrap">Variants (Please enter multiple values with comma separated)</h5>
+                                            <div id="attributes2">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Once In <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds gamed" id="OnceIn" name="OnceIn" bindval="">
+                                                    <option value="3">3</option>
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="15">15</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="500">500</option>
+                                                    <option value="1000">1000</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt">Question1 <span class="vd_red">*</span></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Question :</label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="hidden" name="SmartQuizQuestionId_1" id="SmartQuizQuestionId_1" value="0" />
+                                                @*<textarea class="form-control main-input" id="Question_1" name="Question_1" rows="12" placeholder="Enter your question here"></textarea>*@
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds isvalidate" errormsg="Enter First Question" id="Question_1" name="Question_1" placeholder="Question" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer1 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_1_1" name="SmartQuizAnswerId_1_1" value="0">
+                                                    <input type="hidden" id="imganswer_1_1" name="imganswer_1_1" value="" />
+                                                    <img id="ansimg_1_1" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_1_1" id="Answer_1_1" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg=" select answer image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_1_1', 'Answer_1_1');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer2 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_1_2" name="SmartQuizAnswerId_1_2" value="0">
+                                                    <input type="hidden" id="imganswer_1_2" name="imganswer_1_2" value="" />
+                                                    <img id="ansimg_1_2" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_1_2" id="Answer_1_2" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_1_2', 'Answer_1_2');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer3 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_1_3" name="SmartQuizAnswerId_1_3" value="0">
+                                                    <input type="hidden" id="imganswer_1_3" name="imganswer_1_3" value="" />
+                                                    <img id="ansimg_1_3" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_1_3" id="Answer_1_3" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_1_3', 'Answer_1_3');" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds isvalidate select-one" errormsg="Select Answer" name="CorrectAnswerId_1" id="CorrectAnswerId_1" bindval="" default="0">
+                                                    <option value="0">Answer</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt">Question2 <span class="vd_red">*</span></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Question :</label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="hidden" name="SmartQuizQuestionId_2" id="SmartQuizQuestionId_2" value="0" />
+                                                @*<textarea class="form-control main-input" id="Question_1" name="Question_1" rows="12" placeholder="Enter your question here"></textarea>*@
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds isvalidate" errormsg="Enter First Question" id="Question_2" name="Question_2" placeholder="Question" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer1 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_2_1" name="SmartQuizAnswerId_2_1" value="0">
+                                                    <input type="hidden" id="imganswer_2_1" name="imganswer_2_1" value="" />
+                                                    <img id="ansimg_2_1" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_2_1" id="Answer_2_1" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_2_1', 'Answer_2_1');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer2 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_2_2" name="SmartQuizAnswerId_2_2" value="0">
+                                                    <input type="hidden" id="imganswer_2_2" name="imganswer_2_2" value="" />
+                                                    <img id="ansimg_2_2" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_2_2" id="Answer_2_2" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_2_2', 'Answer_2_2');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer3 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_2_3" name="SmartQuizAnswerId_2_3" value="0">
+                                                    <input type="hidden" id="imganswer_2_3" name="imganswer_2_3" value="" />
+                                                    <img id="ansimg_2_3" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_2_3" id="Answer_2_3" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_2_3', 'Answer_2_3');" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_2" id="CorrectAnswerId_2" bindval="" default="0">
+                                                    <option value="0">Answer</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt">Question3 <span class="vd_red">*</span></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Question :</label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="hidden" name="SmartQuizQuestionId_3" id="SmartQuizQuestionId_3" value="0" />
+                                                @*<textarea class="form-control main-input" id="Question_1" name="Question_1" rows="12" placeholder="Enter your question here"></textarea>*@
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds" id="Question_3" name="Question_3" placeholder="Question" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer1 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_3_1" name="SmartQuizAnswerId_3_1" value="0">
+                                                    <input type="hidden" id="imganswer_3_1" name="imganswer_3_1" value="" />
+                                                    <img id="ansimg_3_1" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_3_1" id="Answer_3_1" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_3_1', 'Answer_3_1');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer2 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_3_2" name="SmartQuizAnswerId_3_2" value="0">
+                                                    <input type="hidden" id="imganswer_3_2" name="imganswer_3_2" value="" />
+                                                    <img id="ansimg_3_2" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_3_2" id="Answer_3_2" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_3_2', 'Answer_3_2');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer3 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_3_3" name="SmartQuizAnswerId_3_3" value="0">
+                                                    <input type="hidden" id="imganswer_3_3" name="imganswer_3_3" value="" />
+                                                    <img id="ansimg_3_3" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_3_3" id="Answer_3_3" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_3_3', 'Answer_3_3');" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_3" id="CorrectAnswerId_3" bindval="" default="0">
+                                                    <option value="0">Answer</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt">Question4 <span class="vd_red">*</span></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Question :</label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="hidden" name="SmartQuizQuestionId_4" id="SmartQuizQuestionId_4" value="0" />
+                                                @*<textarea class="form-control main-input" id="Question_1" name="Question_1" rows="12" placeholder="Enter your question here"></textarea>*@
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds" id="Question_4" name="Question_4" placeholder="Question" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer1 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_4_1" name="SmartQuizAnswerId_4_1" value="0">
+                                                    <input type="hidden" id="imganswer_4_1" name="imganswer_4_1" value="" />
+                                                    <img id="ansimg_4_1" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_4_1" id="Answer_4_1" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_4_1', 'Answer_4_1');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer2 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_4_2" name="SmartQuizAnswerId_4_2" value="0">
+                                                    <input type="hidden" id="imganswer_4_2" name="imganswer_4_2" value="" />
+                                                    <img id="ansimg_4_2" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_4_2" id="Answer_4_2" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_4_2', 'Answer_4_2');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer3 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_4_3" name="SmartQuizAnswerId_4_3" value="0">
+                                                    <input type="hidden" id="imganswer_4_3" name="imganswer_4_3" value="" />
+                                                    <img id="ansimg_4_3" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_4_3" id="Answer_4_3" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_4_3', 'Answer_4_3');" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_4" id="CorrectAnswerId_4" bindval="" default="0">
+                                                    <option value="0">Answer</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group forminnerhead">
+                                            <label class="col-sm-1 control-label"></label>
+                                            <div class="col-sm-6 control-label forminnerheadtxt">Question5 <span class="vd_red">*</span></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Question :</label>
+                                            <div class="col-sm-5 controls">
+                                                <input type="hidden" name="SmartQuizQuestionId_5" id="SmartQuizQuestionId_5" value="0" />
+                                                @*<textarea class="form-control main-input" id="Question_1" name="Question_1" rows="12" placeholder="Enter your question here"></textarea>*@
+                                                <input type="text" class="width-70 width-110 myfilds mytxtfilds" id="Question_5" name="Question_5" placeholder="Question" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer1 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_5_1" name="SmartQuizAnswerId_5_1" value="0">
+                                                    <input type="hidden" id="imganswer_5_1" name="imganswer_5_1" value="" />
+                                                    <img id="ansimg_5_1" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_5_1" id="Answer_5_1" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_5_1', 'Answer_5_1');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer2 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_5_2" name="SmartQuizAnswerId_5_2" value="0">
+                                                    <input type="hidden" id="imganswer_5_2" name="imganswer_5_2" value="" />
+                                                    <img id="ansimg_5_2" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_5_2" id="Answer_5_2" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_5_2', 'Answer_5_2');" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-7 control-label">Answer3 :</label>
+                                                    <input type="hidden" id="SmartQuizAnswerId_5_3" name="SmartQuizAnswerId_5_3" value="0">
+                                                    <input type="hidden" id="imganswer_5_3" name="imganswer_5_3" value="" />
+                                                    <img id="ansimg_5_3" src="" class="previewimg" /><br /><br />
+                                                    <input type="file" name="Answer_5_3" id="Answer_5_3" class="width-70 width-110 myfilds mytxtfilds @(Model.SmartQuizDetails.SmartQuizId==0?"isvalidate":"")" errormsg="Select Answer Image" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_5_3', 'Answer_5_3');" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_5" id="CorrectAnswerId_5" bindval="" default="0">
+                                                    <option value="0">Answer</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group forminnerhead">
+                                                <label class="col-sm-1 control-label"></label>
+                                                <div class="col-sm-6 control-label forminnerheadtxt">Question6 <span class="vd_red">*</span></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Question :</label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="hidden" name="SmartQuizQuestionId_6" id="SmartQuizQuestionId_6" value="0" />
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" id="Question_6" name="Question_6" placeholder="Question" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer1 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_6_1" name="SmartQuizAnswerId_6_1" value="0">
+                                                        <input type="hidden" id="imganswer_6_1" name="imganswer_6_1" value="" />
+                                                        <img id="ansimg_6_1" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_6_1" id="Answer_6_1" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_6_1', 'Answer_6_1');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer2 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_6_2" name="SmartQuizAnswerId_6_2" value="0">
+                                                        <input type="hidden" id="imganswer_6_2" name="imganswer_6_2" value="" />
+                                                        <img id="ansimg_6_2" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_6_2" id="Answer_6_2" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_6_2', 'Answer_6_2');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer3 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_6_3" name="SmartQuizAnswerId_6_3" value="0">
+                                                        <input type="hidden" id="imganswer_6_3" name="imganswer_6_3" value="" />
+                                                        <img id="ansimg_6_3" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_6_3" id="Answer_6_3" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_6_3', 'Answer_6_3');" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_6" id="CorrectAnswerId_6" bindval="" default="0">
+                                                        <option value="0">Answer</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group forminnerhead">
+                                                <label class="col-sm-1 control-label"></label>
+                                                <div class="col-sm-6 control-label forminnerheadtxt">Question7 <span class="vd_red">*</span></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Question :</label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="hidden" name="SmartQuizQuestionId_7" id="SmartQuizQuestionId_7" value="0" />
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" id="Question_7" name="Question_7" placeholder="Question" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer1 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_7_1" name="SmartQuizAnswerId_7_1" value="0">
+                                                        <input type="hidden" id="imganswer_7_1" name="imganswer_7_1" value="" />
+                                                        <img id="ansimg_7_1" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_7_1" id="Answer_7_1" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_7_1', 'Answer_7_1');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer2 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_7_2" name="SmartQuizAnswerId_7_2" value="0">
+                                                        <input type="hidden" id="imganswer_7_2" name="imganswer_7_2" value="" />
+                                                        <img id="ansimg_7_2" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_7_2" id="Answer_7_2" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_7_2', 'Answer_7_2');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer3 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_7_3" name="SmartQuizAnswerId_7_3" value="0">
+                                                        <input type="hidden" id="imganswer_7_3" name="imganswer_7_3" value="" />
+                                                        <img id="ansimg_7_3" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_7_3" id="Answer_7_3" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_7_3', 'Answer_7_3');" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_7" id="CorrectAnswerId_7" bindval="" default="0">
+                                                        <option value="0">Answer</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group forminnerhead">
+                                                <label class="col-sm-1 control-label"></label>
+                                                <div class="col-sm-6 control-label forminnerheadtxt">Question8 <span class="vd_red">*</span></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Question :</label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="hidden" name="SmartQuizQuestionId_8" id="SmartQuizQuestionId_8" value="0" />
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" id="Question_8" name="Question_8" placeholder="Question" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer1 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_8_1" name="SmartQuizAnswerId_8_1" value="0">
+                                                        <input type="hidden" id="imganswer_8_1" name="imganswer_8_1" value="" />
+                                                        <img id="ansimg_8_1" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_8_1" id="Answer_8_1" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_8_1', 'Answer_8_1');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer2 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_8_2" name="SmartQuizAnswerId_8_2" value="0">
+                                                        <input type="hidden" id="imganswer_8_2" name="imganswer_8_2" value="" />
+                                                        <img id="ansimg_8_2" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_8_2" id="Answer_8_2" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_8_2', 'Answer_8_2');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer3 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_8_3" name="SmartQuizAnswerId_8_3" value="0">
+                                                        <input type="hidden" id="imganswer_8_3" name="imganswer_8_3" value="" />
+                                                        <img id="ansimg_8_3" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_8_3" id="Answer_8_3" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_8_3', 'Answer_8_3');" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_8" id="CorrectAnswerId_8" bindval="" default="0">
+                                                        <option value="0">Answer</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group forminnerhead">
+                                                <label class="col-sm-1 control-label"></label>
+                                                <div class="col-sm-6 control-label forminnerheadtxt">Question9 <span class="vd_red">*</span></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Question :</label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="hidden" name="SmartQuizQuestionId_9" id="SmartQuizQuestionId_9" value="0" />
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" id="Question_9" name="Question_9" placeholder="Question" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer1 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_9_1" name="SmartQuizAnswerId_9_1" value="0">
+                                                        <input type="hidden" id="imganswer_9_1" name="imganswer_9_1" value="" />
+                                                        <img id="ansimg_9_1" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_9_1" id="Answer_9_1" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_9_1', 'Answer_9_1');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer2 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_9_2" name="SmartQuizAnswerId_9_2" value="0">
+                                                        <input type="hidden" id="imganswer_9_2" name="imganswer_9_2" value="" />
+                                                        <img id="ansimg_9_2" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_9_2" id="Answer_9_2" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_9_2', 'Answer_9_2');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer3 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_9_3" name="SmartQuizAnswerId_9_3" value="0">
+                                                        <input type="hidden" id="imganswer_9_3" name="imganswer_9_3" value="" />
+                                                        <img id="ansimg_9_3" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_9_3" id="Answer_9_3" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_9_3', 'Answer_9_3');" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_9" id="CorrectAnswerId_9" bindval="" default="0">
+                                                        <option value="0">Answer</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group forminnerhead">
+                                                <label class="col-sm-1 control-label"></label>
+                                                <div class="col-sm-6 control-label forminnerheadtxt">Question10 <span class="vd_red">*</span></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Question :</label>
+                                                <div class="col-sm-5 controls">
+                                                    <input type="hidden" name="SmartQuizQuestionId_10" id="SmartQuizQuestionId_10" value="0" />
+                                                    <input type="text" class="width-70 width-110 myfilds mytxtfilds" id="Question_10" name="Question_10" placeholder="Question" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer1 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_10_1" name="SmartQuizAnswerId_10_1" value="0">
+                                                        <input type="hidden" id="imganswer_10_1" name="imganswer_10_1" value="" />
+                                                        <img id="ansimg_10_1" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_10_1" id="Answer_10_1" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_10_1', 'Answer_10_1');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer2 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_10_2" name="SmartQuizAnswerId_10_2" value="0">
+                                                        <input type="hidden" id="imganswer_10_2" name="imganswer_10_2" value="" />
+                                                        <img id="ansimg_10_2" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_10_2" id="Answer_10_2" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_10_2', 'Answer_10_2');" />
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label class="col-sm-7 control-label">Answer3 :</label>
+                                                        <input type="hidden" id="SmartQuizAnswerId_10_3" name="SmartQuizAnswerId_10_3" value="0">
+                                                        <input type="hidden" id="imganswer_10_3" name="imganswer_10_3" value="" />
+                                                        <img id="ansimg_10_3" src="" class="previewimg" /><br /><br />
+                                                        <input type="file" name="Answer_10_3" id="Answer_10_3" class="width-70 width-110 myfilds mytxtfilds" placeholder="Upload First Prize Image" onchange="loadImageFile(this, 'ansimg_10_3', 'Answer_10_3');" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Answer <span class="vd_red">*</span></label>
+                                                <div class="col-sm-5 controls">
+                                                    <select class="width-70 width-110 myfilds mytxtfilds" name="CorrectAnswerId_10" id="CorrectAnswerId_10" bindval="" default="0">
+                                                        <option value="0">Answer</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>*@
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Status <span class="vd_red">*</span></label>
+                                            <div class="col-sm-5 controls">
+                                                <select class="width-70 width-110 myfilds mytxtfilds" id="Status" name="Status" bindval="">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">InActive</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group form-actions">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-9">
+                                                <button class="btn vd_btn vd_bg-green vd_white" type="submit" onclick="return validate()"><i class="icon-ok"></i>Save</button>
+                                                @Html.ActionLink("Cancel", "ViewSmartQuiz", new { controller = "SmartQuiz" }, new { @class = "btn btn-danger" })
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-4" id="qrcode">
+
+                                </div>
+                            </div>
+                            @*<form name="uploadForm">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>Select Image - <input id="upload-Image" type="file" onchange="loadImageFile();" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Origal Img - <img id="original-Img" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Compress Img - <img id="upload-Preview" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><br /> Please select image file and save compress file on your machine.<br /> For more - <a href="https://code-sample.com" ratget="_blank"> codesample</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>*@
+                            @*<input id="upload-Image" type="file" onchange="loadImageFile();" />*@
+                            <img id="original-Img" style="display:none" />
+                            @*<img id="upload-Preview" />*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<link href="@Url.Content(Globalsettings.admincsspath("daterangepicker-bs3.css?v=1.0.0"))" rel="stylesheet" type="text/css">*@
+<link href="@Url.Content(Globalsettings.admincsspath("bootstrap-multiselect.css"))" rel="stylesheet" type="text/css">
+<link href="@Url.Content(Globalsettings.admincsspath("bs-datetime.css"))" rel="stylesheet" />
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("bootstrap-multiselect.js"))"></script>
+@*<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("daterangepicker.js?v=1.0.0"))"></script>*@
+>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("moment.min.js?v=1.0.0"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("jquery.validate.unobtrusive.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("inputmask.js"))"></script>
+<script src="@Url.Content(Globalsettings.adminjspath("bootstrap-datepicker.min.js"))"></script>
+<script type="text/javascript" src="@Url.Content(Globalsettings.adminjspath("smartquiz.js"))"></script>
+
+<script>
+    $(document).ready(function () {
+        GetSmartquizQandAedit();
+        if ($("#TotalPlayed").val() != 0) {
+            $('.game').prop('readonly', true);
+            $('.gamed').prop('disabled', true);
+            alert("Game is in play mode, Please don't make changes.");
+        }
+    });
+</script>
+<script>
+    //$('.date').datepicker({
+    //    format: 'dd-mm-yyyy',
+    //    startDate: '-3d'
+    //});
+    $('.date').datepicker({
+        format: 'dd-M-yyyy',
+        widgetPositioning: {
+            horizontal: 'right',
+            vertical: 'bottom'
+        },
+        // sideBySide: true,
+        icons: {
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-check',
+            clear: 'fa fa-trash',
+            close: 'fa fa-times'
+        }
+    });
+    $(function () {
+        if (window.jQuery().datetimepicker) {
+            $('.datetime').datetimepicker({
+                format: 'DD-MMM-YYYY hh:mm a',
+                widgetPositioning: {
+                    horizontal: 'right',
+                    vertical: 'bottom'
+                },
+                // sideBySide: true,
+                icons: {
+                    time: 'fa fa-clock',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-check',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            });
+        }
+    });
+</script>
+
+<script type="text/javascript">
+
+    function filevalidate() {
+        //$("#file_error").html("");
+        //$(".demoInputBox").css("border-color", "#F0F0F0");
+        var file_size = $(fileid)[0].files[0].size;
+        if (file_size > 100) {
+            alert("File size is greater than 100KB");
+            //$(".demoInputBox").css("border-color", "#FF0000");
+            return false;
+        }
+        return true;
+    }
+    //$(document).ready(function () {
+    //    var GameStart = $("#TotalPlayed").val();
+    //    if (GameStart > 0) {
+    //        $('.game').addClass('disabled');
+    //        alert("Game is in play, Don't make changes.");
+    //    }
+    //});
+
+    function loadImageFile(input, previewctrl, fileid) {
+        const fi = document.getElementById(fileid);
+        const fsize = fi.files.item(0).size;
+        const file = Math.round((fsize / 1024));
+        // The size of the file.
+        //if (file >= 50) {
+        //    alert(
+        //      "Image too Big, please select a file less than 50KB");
+        //    $('#' + fileid).val("");
+        //    return;
+        //}
+        //var imgfile, img;
+        //if ((imgfile = this.files[0])) {
+        //    img = new Image();
+        //    img.onload = function() {
+        //        if(this.width != this.height){
+        //            alert('Image height width must be equal.');
+        //            return;
+        //        }
+        //    };
+        //    img.onerror = function() {
+        //        alert( "not a valid file: " + file.type);
+        //    };
+        //    img.src = _URL.createObjectURL(file);
+
+        //}
+
+
+        var fileReader = new FileReader();
+        var filterType = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+        var uploadImage = document.getElementById(fileid);
+
+        //check and retuns the length of uploded file.
+        if (uploadImage.files.length === 0) {
+            return;
+        }
+
+        //Is Used for validate a valid file.
+        var uploadFile = document.getElementById(fileid).files[0];
+        if (!filterType.test(uploadFile.type)) {
+            alert("Please select a valid image.");
+            return;
+        }
+        //console.log(uploadFile);
+        fileReader.readAsDataURL(uploadFile);
+
+
+
+
+        fileReader.onloadend = function (event) {
+            var image = new Image();
+
+            image.onload = function () {
+                document.getElementById("original-Img").src = image.src;
+                var canvas = document.createElement("canvas");
+                var context = canvas.getContext("2d");
+                canvas.width = 250;
+                canvas.height = 250;
+                context.drawImage(image,
+                    0,
+                    0,
+                    image.width,
+                    image.height,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+                document.getElementById(previewctrl).src = canvas.toDataURL();
+            }
+            image.src = event.target.result;
+        };
+    }
+
+    // Check if any file is selected.
+
+</script>
+
+
+
+

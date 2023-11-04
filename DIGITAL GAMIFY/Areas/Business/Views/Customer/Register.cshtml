@@ -1,0 +1,259 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using DIGITAL_GAMIFY.Code
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Swipe & WIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="~/customercontent/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/customercontent/css/styles.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        var websiteurl = '@Globalsettings.GetWebSiteUrl()';
+        var websiteurlapi = '@Globalsettings.GetWebSiteUrlApi()';
+    </script>
+   
+</head>
+<body>
+    <div class="main-row">
+        <div class="">
+            <div class="">
+                <div class="frame-border">
+                    <nav class="navbar navbar-light b-color">
+                        <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="fa fa-align-justify"></span>
+                        </button>
+
+                        <button class="invisible px-3"></button>
+
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                <li class="nav-item active">
+                                    <a class="nav-link text-light" href="#">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#">Link</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+
+                    <div class="container-fluid p-0 content-h boxscroll do-nicescrol4 signin-bg py-5">
+
+
+                        <div class="container py-5">
+                            <div class="row">
+                                <div class="col-md-12 mx-auto">
+                                    <div id="second">
+                                        <div class="myform form ">
+                                            <div class="logo mb-3">
+                                                <div class="col-md-12 text-center">
+                                                    <h3 class="text-dark">Login</h3>
+                                                </div>
+                                            </div>
+                                            <form action="" method="post" name="login">
+                                                <div class="form-group">
+                                                    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Password">
+                                                </div>
+                                                <div class="col-md-12 text-center ">
+                                                    <button type="submit" class=" btn btn-block mybtn text-white g-btn tx-tfm">Login</button>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p class="text-center">Don't have account? <a href="#" id="signup">Sign up here</a></p>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                    <div id="first">
+                                        <div class="myform form ">
+                                            <div class="logo mb-3">
+                                                <div class="col-md-12 text-center">
+                                                    <h3 class="text-dark">Signup</h3>
+                                                </div>
+                                            </div>
+                                            <form action="#" name="registration">
+                                                <input type="hidden" id="customerid" value="" />
+                                                <input type="hidden" id="BusinessId" name="BusinessId" value="@Session["outletid"].ToString()" />
+                                                <input type="hidden" id="gid" value="@Session["gameid"].ToString()" />
+                                                <input type="hidden" id="pznum" value="@Session["prizenumber"].ToString()" />
+                                                <div class="form-group">
+                                                    <input type="text" name="FirstName" class="form-control" id="FirstName" aria-describedby="emailHelp" placeholder="Enter FirstName">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="LastName" class="form-control" id="LastName" aria-describedby="emailHelp" placeholder="Enter LastName">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="Mobile" class="form-control" id="Mobile" aria-describedby="emailHelp" placeholder="Enter Mobile" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" name="Email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="Pin" id="Pin" class="form-control" maxlength="4" aria-describedby="emailHelp" placeholder="Enter Pin(4 digits)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                                    @*<span class="vd_red">(4 digit pin)</span>*@
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="Gender" class="form-control" id="Gender" default=0 aria-describedby="emailHelp">
+                                                        <option selected value="0">Select Gender</option>
+                                                        <option value="1">Male</option>
+                                                        <option value="2">Female</option>
+                                                        <option value="3">Others</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="Age" class="form-control" id="Age" default=0 aria-describedby="emailHelp">
+                                                        <option selected value="0">Select Age</option>
+                                                        <option value="1">(10-18)</option>
+                                                        <option value="2">(19-40)</option>
+                                                        <option value="3">(41-65)</option>
+                                                        <option value="4">(65+)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="ZipCode" class="form-control" id="ZipCode" aria-describedby="emailHelp" placeholder="Enter ZipCode">
+                                                </div>
+                                                <div class="col-md-12 text-center">
+                                                    <button type="button" class=" btn btn-block mybtn text-white g-btn tx-tfm" onclick="return Register()">Signup</button>
+                                                </div>
+                                                @*<div class="col-md-12 ">
+                                                    <div class="form-group">
+                                                        <p class="text-center"><a href="#" id="signin">Already have an account?</a></p>
+                                                    </div>
+                                                </div>*@
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="circle-button"></div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.min.js"></script>
+    <script src="~/customercontent/js/bootstrap.min.js"></script>
+    <script src="~/customercontent/js/popper.min.js"></script>
+    <script src="~/customercontent/js/global.js"></script>
+
+
+    <script type="text/javascript">
+        $("#signup").click(function () {
+            $("#first").fadeOut("fast", function () {
+                $("#second").fadeIn("fast");
+            });
+        });
+
+        $("#signin").click(function () {
+            $("#second").fadeOut("fast", function () {
+                $("#first").fadeIn("fast");
+            });
+        });
+        function Register() {
+            var gamefinishUrl = websiteurl + "business/customer/Finish";
+            //var res = validate();
+            if ($('#FirstName').val() == "") {
+                alert("Enter FirstName")
+            }
+            if ($('#LastName').val() == "") {
+                alert("Enter LastName")
+            }
+            if ($('#Mobile').val() == "") {
+                alert("Enter Mobile")
+            }
+            if ($('#Email').val() == "") {
+                alert("Enter Email")
+            }
+            if ($('#Pin').val() == "") {
+                alert("Enter Pin")
+            }
+            if ($('#Gender').val() == 0) {
+                alert("Select Gender")
+            }
+            if ($('#Age').val() == 0) {
+                alert("Select Age")
+            }
+            if ($('#ZipCode').val() == "") {
+                alert("Select ZipCode")
+            }
+               
+            else {
+                var empObj = {
+                    FirstName: $('#FirstName').val(),
+                    LastName: $('#LastName').val(),
+                    Mobile: $('#Mobile').val(),
+                    Email: $('#Email').val(),
+                    Pin: $("#Pin").val(),
+                    Gender: $("#Gender").val(),
+                    Age: $("#Age").val(),
+                    ZipCode: $("#ZipCode").val(),
+                    BusinessId: $('#BusinessId').val(),
+                    Guest:1,
+                };
+                $.ajax({
+                    url: websiteurlapi + "RegisterCustomer",
+                    data: JSON.stringify(empObj),
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $("input:text").val("");
+                        $("#Email").val("");
+                        $("#Pin").val("");
+                        if (result.Status) {
+                            if (result.Success) {
+                                var data = result.Data
+                                //console.log(data);
+                                if (data.Id < 0) {
+                                    alert(result.data.Message);
+                                }
+                                $("#customerid").val(data.Id);
+                            }
+                        }
+                        RedeemPrize();
+                        //window.location.href = gamefinishUrl;
+                        window.location.href = "@Url.Action("Finish", "customer")";
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+        }
+        function RedeemPrize() {
+            var cid = $("#customerid").val();
+            var gid = $("#gid").val();
+            var pznum = $("#pznum").val();
+            gl.ajaxreq(websiteurlapi + 'RedeemPrize', 'get', { cid: cid, gid: gid, pznum: pznum,Promocheck:0 }, function (response) {
+                if (response.Status) {
+                    if (response.Success) {
+                        var data = response.Data;
+
+                    }
+                }
+            }, '', '', '', '', false, false);
+        }
+    </script>
+</body>
+</html>
+
